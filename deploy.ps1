@@ -11,7 +11,7 @@ param(
 $ftpUser = "deploy@ingelyv.cl"
 $ftpPass = "Deploy2026!"
 $ftpHost = "ftp://ftp.ingelyv.cl"
-$srcDir = "c:\Proyectos\EMPRESARIAL\SITIO WEB INGELYV SPA"
+$srcDir = "D:\PROY. ANTIGRAVITY\02_CORP_INGELYV\01_INTERNO_INGELYV\SITIO WEB INGELYV SPA"
 
 $ErrorActionPreference = "Continue"
 
