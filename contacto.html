@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contacto - INGELYV</title>
+    <meta name="description"
+        content="Contáctanos para resolver tus necesidades de ingeniería industrial y construcción. Nuestro equipo experto está listo para optimizar tus procesos.">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class", theme: {
+                extend: {
+                    colors: { "primary": "#f2690d", "primary-blue": "#002D62", "accent-orange": "#FF8C00", "background-dark": "#0f172a", "surface-dark": "#1e293b", "border-dark": "#334155" },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.125rem", "sm": "0.125rem", "md": "0.25rem", "lg": "0.5rem", "full": "9999px" },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="dark-page bg-background-dark text-white flex flex-col min-h-screen page-fade-in blueprint-pattern">
+    <!-- HEADER (Dark) -->
+    <header class="sticky top-0 z-50 w-full bg-background-dark/95 backdrop-blur-sm border-b border-border-dark">
+        <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 text-white no-underline">
+                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Ingenieros que Resuelven"
+                    class="h-12 w-auto object-contain">
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    href="index.html">Inicio</a>
+                <a class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    href="servicios.html">Servicios</a>
+                <a class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    href="nosotros.html">Nosotros</a>
+                <a class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    href="contacto.html">Contacto</a>
+            </nav>
+            <a href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                target="_blank"
+                class="hidden md:flex h-10 px-6 items-center justify-center bg-primary text-white text-sm font-bold uppercase tracking-wider hover:bg-primary/80 transition-colors rounded-sm shadow-md no-underline border border-primary">Cotizar</a>
+            <button id="mobile-menu-btn" class="md:hidden text-white p-2"><span
+                    class="material-symbols-outlined">menu</span></button>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-background-dark border-t border-border-dark px-6">
+            <div class="py-4 flex flex-col gap-4"><a class="nav-link text-sm font-medium text-gray-400"
+                    href="index.html">Inicio</a><a class="nav-link text-sm font-medium text-gray-400"
+                    href="servicios.html">Servicios</a><a class="nav-link text-sm font-medium text-gray-400"
+                    href="nosotros.html">Nosotros</a><a class="nav-link text-sm font-medium text-gray-400"
+                    href="contacto.html">Contacto</a></div>
+        </div>
+    </header>
+    <main class="flex-grow w-full">
+        <!-- CONTACT HERO -->
+        <section class="py-16 px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col lg:flex-row gap-16 reveal">
+                    <!-- Left: Info -->
+                    <div class="lg:w-1/2">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="w-2 h-2 bg-primary rounded-full"></span>
+                            <span class="text-sm font-bold text-gray-300 uppercase tracking-widest">Ingeniería
+                                Industrial</span>
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6">
+                            Hablemos de tu<br />próximo <span class="text-primary italic">desafío</span>
+                        </h1>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-12">
+                            Contáctanos para resolver tus necesidades de ingeniería industrial y construcción. Nuestro
+                            equipo experto está listo para optimizar tus procesos.
+                        </p>
+                        <!-- Contact Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div
+                                class="bg-surface-dark border border-border-dark p-6 rounded-sm hover:border-primary/50 transition-colors">
+                                <div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-primary">location_on</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Oficina Central</h3>
+                                <p class="text-gray-400 text-sm">Av. O'Higgins 1186,<br />Concepción, Chile</p>
+                            </div>
+                            <div
+                                class="bg-surface-dark border border-border-dark p-6 rounded-sm hover:border-primary/50 transition-colors">
+                                <div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-primary">mail</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Escríbenos</h3>
+                                <p class="text-gray-400 text-sm">contacto@ingelyv.cl</p>
+                            </div>
+                            <div
+                                class="bg-surface-dark border border-border-dark p-6 rounded-sm hover:border-primary/50 transition-colors">
+                                <div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-primary">phone</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Llámanos</h3>
+                                <p class="text-gray-400 text-sm">+56 9 5323 9879</p>
+                            </div>
+                            <div
+                                class="bg-surface-dark border border-border-dark p-6 rounded-sm hover:border-primary/50 transition-colors">
+                                <div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center mb-4">
+                                    <span class="material-symbols-outlined text-primary">share</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Síguenos</h3>
+                                <p class="text-gray-400 text-sm">LinkedIn ↗</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right: Form -->
+                    <div class="lg:w-1/2">
+                        <div
+                            class="bg-surface-dark border border-border-dark p-8 md:p-10 rounded-sm border-t-4 border-t-primary">
+                            <h2 class="text-2xl font-black text-white mb-8">Envíanos un mensaje</h2>
+                            <form id="contact-form" class="space-y-5">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Nombre
+                                            completo</label>
+                                        <input id="name" type="text" placeholder="Ej. Juan Perez"
+                                            class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Empresa</label>
+                                        <input id="company" type="text" placeholder="Ej. Constructora Ltda."
+                                            class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Teléfono</label>
+                                        <input id="phone" type="tel" placeholder="+56 9 1234 5678"
+                                            class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Sector</label>
+                                        <select id="sector"
+                                            class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-gray-400 text-sm rounded-sm focus:border-primary focus:ring-0">
+                                            <option>Selecciona una opción</option>
+                                            <option>Minería</option>
+                                            <option>Construcción</option>
+                                            <option>Energía</option>
+                                            <option>Industrial</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-gray-300 mb-1.5 block">Mensaje</label>
+                                    <textarea id="message" rows="4"
+                                        placeholder="Cuéntanos brevemente sobre tu proyecto..."
+                                        class="form-input w-full px-4 py-3 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0 resize-none"></textarea>
+                                </div>
+                                <button type="submit"
+                                    class="w-full h-12 bg-primary hover:bg-primary/80 text-white text-sm font-bold uppercase tracking-wider transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg">
+                                    <span>Asesorate con un experto</span>
+                                    <span class="material-symbols-outlined !text-lg">arrow_forward</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- MAP -->
+        <section class="w-full h-80 md:h-96 relative reveal">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3180.7!2d-73.05!3d-36.82!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDQ5JzE0LjciUyA3M8KwMDMnMDAuMCJX!5e0!3m2!1ses!2scl!4v1"
+                width="100%" height="100%" style="border:0; filter: saturate(0) contrast(1.1) brightness(0.5);"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div
+                class="absolute top-4 left-4 bg-surface-dark/95 backdrop-blur-sm border border-border-dark p-4 rounded-sm max-w-xs">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-bold text-white text-sm">Av. O'Higgins 1186</h3>
+                    <span class="material-symbols-outlined text-gray-400 !text-lg">near_me</span>
+                </div>
+                <p class="text-gray-400 text-xs mb-1">Av. O'Higgins 1186, 4070001</p>
+                <p class="text-gray-400 text-xs mb-2">Concepción, Chiguayante, Bío Bío</p>
+                <a href="#" class="text-primary text-xs font-medium hover:underline">Ampliar el mapa</a>
+            </div>
+            <div
+                class="absolute bottom-4 left-4 bg-primary/90 backdrop-blur-sm p-4 rounded-sm max-w-xs border border-primary">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined text-white !text-lg">flag</span>
+                    <h3 class="font-bold text-white text-sm">Ubicación Estratégica</h3>
+                </div>
+                <p class="text-gray-200 text-xs">Nuestra oficina en Concepción nos permite una rápida respuesta a
+                    proyectos en la zona sur.</p>
+            </div>
+        </section>
+    </main>
+    <!-- FOOTER (Dark) -->
+    <footer class="bg-background-dark border-t border-border-dark py-12 px-6">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+                <div class="flex items-center gap-3">
+                    <img src="Logo INGELYV SPA.png" alt="INGELYV SPA" class="h-12 w-auto object-contain">
+                </div>
+                <a href="https://linkedin.com" target="_blank"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-primary transition-colors"><span
+                        class="material-symbols-outlined !text-[18px]">share</span></a>
+            </div>
+            <div class="pt-6 border-t border-border-dark text-center text-xs text-gray-500">
+                <p>© 2024 INGELYV. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

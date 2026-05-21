@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Servicios - INGELYV</title>
+    <meta name="description"
+        content="Catálogo completo de soluciones técnicas y empresariales de INGELYV. Consultoría, ingeniería, gestión y más.">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class", theme: {
+                extend: {
+                    colors: { "primary": "#002D62", "primary-light": "#1a4b8a", "accent-orange": "#FF8C00", "accent-orange-hover": "#e67e00", "background-light": "#f5f5f8", "background-dark": "#0f0f23", "surface": "#ffffff" },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.125rem", "sm": "0.125rem", "md": "0.25rem", "lg": "0.5rem", "full": "9999px" },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-background-light text-primary flex flex-col min-h-screen page-fade-in">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-[1440px] mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 text-primary no-underline">
+                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Ingenieros que Resuelven"
+                    class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="index.html">Inicio</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="servicios.html">Servicios</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="nosotros.html">Nosotros</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="contacto.html">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                    target="_blank"
+                    class="hidden md:flex h-10 px-6 items-center justify-center bg-primary text-white text-sm font-bold uppercase tracking-wider hover:bg-primary-light transition-colors rounded-sm shadow-md no-underline">Cotizar</a>
+                <button id="mobile-menu-btn" class="md:hidden text-primary p-2"><span
+                        class="material-symbols-outlined">menu</span></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 px-6">
+            <div class="py-4 flex flex-col gap-4"><a class="nav-link text-sm font-medium text-gray-600"
+                    href="index.html">Inicio</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="servicios.html">Servicios</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="nosotros.html">Nosotros</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="contacto.html">Contacto</a><a
+                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                    target="_blank"
+                    class="h-10 px-6 flex items-center justify-center bg-primary text-white text-sm font-bold uppercase rounded-sm no-underline">Cotizar</a>
+            </div>
+        </div>
+    </header>
+    <main class="flex-grow w-full">
+        <!-- HERO BANNER -->
+        <section class="bg-primary py-16 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 grid-pattern"></div>
+            <div class="max-w-[1200px] mx-auto relative z-10">
+                <span class="text-accent-orange font-bold text-sm tracking-[0.2em] uppercase mb-3 block">Soluciones
+                    Industriales</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Ingeniería de Excelencia para
+                    el<br />Crecimiento Sostenible</h1>
+                <p class="text-gray-300 text-lg max-w-2xl">Ofrecemos un portafolio integral de servicios especializados,
+                    desde consultoría estratégica hasta ejecución técnica de alto nivel, diseñados para optimizar sus
+                    procesos industriales.</p>
+            </div>
+        </section>
+        <!-- SERVICES GRID -->
+        <section class="py-16 px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex justify-between items-end mb-10 reveal">
+                    <div>
+                        <h2 class="text-3xl font-black text-primary tracking-tight">Nuestros Servicios</h2>
+                        <p class="text-gray-500 text-sm mt-1">Catálogo completo de soluciones técnicas y empresariales
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Registro Empresarial" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-accent-orange text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Legal</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Registro
+                                Empresarial Full</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Gestión integral para la constitución
+                                y formalización de empresas orientada a profesionales y técnicos del sector
+                                construcción, eléctrico, industrial y servicios anexos como prevención de riesgos,
+                                jardinería, vigilancia, alimentación y más. Cumplimiento normativo total desde el
+                                primer día.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Consultoría</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Identidad Corporativa" /></div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Identidad
+                                Corporativa</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Desarrollo estratégico de marca e
+                                imagen corporativa. Posicionamos su negocio en el mercado industrial con una identidad
+                                visual sólida y coherente.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Branding</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Estudios de Mercado" /></div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Estudios de
+                                Mercado</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Análisis profundo de competidores,
+                                tendencias y comportamiento del consumidor para fundamentar sus decisiones de inversión
+                                con datos reales.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Estrategia</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Factibilidad Técnica" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Ingeniería</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Factibilidad
+                                Técnica</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Evaluación rigurosa de viabilidad para
+                                proyectos industriales. Minimizamos riesgos mediante análisis técnicos y económicos
+                                antes de la ejecución.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Proyectos</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Gestión de Calidad" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Calidad</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Gestión de Calidad
+                            </h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Implementación y control de estándares
+                                de calidad (ISO/normativa técnica) en procesos constructivos e industriales.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Normativa</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Reclutamiento" /></div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Reclutamiento</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Búsqueda y selección de talento
+                                especializado para el sector industrial. Encontramos los perfiles técnicos que su
+                                empresa necesita para crecer.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">RRHH</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 7 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Ingeniería de Detalle" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Ingeniería</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Ingeniería de
+                                Detalle</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Desarrollo exhaustivo de planos,
+                                cálculos y especificaciones técnicas listos para la construcción. Precisión milimétrica
+                                para montajes complejos.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Técnico</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 8 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Licitaciones Estratégicas" /></div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Licitaciones
+                                Estratégicas</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Asesoría experta en la preparación y
+                                gestión de propuestas para licitaciones públicas y privadas, maximizando sus
+                                posibilidades de adjudicación.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Gestión</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 9 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="ITO" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Obras</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">ITO (Inspección
+                                Técnica)</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Supervisión en terreno para garantizar
+                                que las obras se ejecuten según normas, plazos y presupuesto, asegurando la calidad
+                                constructiva.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Supervisión</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 10 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Montajes Eléctricos" />
+                            <div class="absolute top-3 left-3"><span
+                                    class="bg-yellow-500 text-gray-900 text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Energía</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Montajes
+                                Eléctricos</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Ejecución de instalaciones eléctricas
+                                industriales de baja y media tensión. Soluciones seguras y certificadas para la
+                                continuidad operativa.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Instalaciones</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                    <!-- Card 11 -->
+                    <div
+                        class="service-card bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all duration-300 reveal group">
+                        <div class="relative h-48 overflow-hidden"><img
+                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                alt="Outsourcing PMO" /></div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-base text-primary uppercase tracking-wide mb-2">Outsourcing PMO
+                            </h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Externalización de Oficina de Gestión
+                                de Proyectos. Proveemos líderes experimentados para asegurar el éxito y gobernanza de
+                                sus iniciativas.</p>
+                            <div class="flex items-center justify-between"><span
+                                    class="text-gray-400 text-xs font-bold uppercase tracking-wider">Gestión</span><a
+                                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n"
+                                    target="_blank"
+                                    class="text-accent-orange hover:text-accent-orange-hover transition-colors"><span
+                                        class="material-symbols-outlined">arrow_forward</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CTA -->
+        <section class="bg-primary py-16 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 grid-pattern"></div>
+            <div
+                class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                <div>
+                    <h2 class="text-3xl font-black text-white mb-2">¿Necesita una solución personalizada?</h2>
+                    <p class="text-gray-300">Nuestro equipo de ingenieros expertos está listo para evaluar su próximo
+                        desafío industrial.</p>
+                </div>
+                <a href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20necesito%20una%20soluci%C3%B3n%20personalizada"
+                    target="_blank"
+                    class="shrink-0 h-12 px-8 bg-accent-orange hover:bg-accent-orange-hover text-white text-sm font-bold uppercase tracking-wider transition-all rounded-sm flex items-center gap-2 no-underline shadow-lg"><span>Contáctenos
+                        Hoy</span></a>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-primary text-white pt-20 pb-10 border-t-4 border-accent-orange">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-12 mb-16">
+                <div class="max-w-sm">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="Logo INGELYV SPA.png" alt="INGELYV SPA" class="h-14 w-auto object-contain">
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Ingeniería y consultoría estratégica para el
+                        desarrollo industrial sostenible y eficiente.</p>
+                    <div class="flex gap-4"><a
+                            class="w-10 h-10 flex items-center justify-center rounded-sm bg-white/10 hover:bg-accent-orange transition-colors"
+                            href="#"><span class="material-symbols-outlined !text-[20px]">public</span></a><a
+                            class="w-10 h-10 flex items-center justify-center rounded-sm bg-white/10 hover:bg-accent-orange transition-colors"
+                            href="mailto:contacto@ingelyv.cl"><span
+                                class="material-symbols-outlined !text-[20px]">mail</span></a></div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 md:gap-20">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4 text-accent-orange">Navegación</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li><a class="hover:text-white transition-colors" href="index.html">Inicio</a></li>
+                            <li><a class="hover:text-white transition-colors" href="servicios.html">Servicios</a></li>
+                            <li><a class="hover:text-white transition-colors" href="nosotros.html">Nosotros</a></li>
+                            <li><a class="hover:text-white transition-colors" href="contacto.html">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4 text-accent-orange">Legal</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li><a class="hover:text-white transition-colors" href="#">Términos y Condiciones</a></li>
+                            <li><a class="hover:text-white transition-colors" href="#">Política de Privacidad</a></li>
+                            <li><a class="hover:text-white transition-colors" href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4 text-accent-orange">Contacto</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">location_on</span>Av.
+                                O'Higgins 1186, Concepción</li>
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">mail</span>contacto@ingelyv.cl
+                            </li>
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">phone</span>+56
+                                9 5323 9879</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <p>© 2024 INGELYV. Todos los derechos reservados.</p><span>LinkedIn · Twitter</span>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

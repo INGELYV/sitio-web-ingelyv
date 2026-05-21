@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Nosotros - INGELYV</title>
+    <meta name="description"
+        content="Empresa de Consultoría y Construcción con Ingeniería Civil Industrial y MBA. Conoce nuestros pilares: cercanía, rigor y resultados.">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class", theme: {
+                extend: {
+                    colors: { "primary": "#002D62", "primary-light": "#1a4b8a", "accent-orange": "#FF8C00", "accent-orange-hover": "#e67e00", "background-light": "#f5f5f8", "background-dark": "#0f0f23", "surface": "#ffffff" },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.125rem", "sm": "0.125rem", "md": "0.25rem", "lg": "0.5rem", "full": "9999px" },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-background-light text-primary flex flex-col min-h-screen page-fade-in">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-[1440px] mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 text-primary no-underline">
+                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Ingenieros que Resuelven"
+                    class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="index.html">Inicio</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="servicios.html">Servicios</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="nosotros.html">Nosotros</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="contacto.html">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20agendar%20una%20asesor%C3%ADa"
+                    target="_blank"
+                    class="hidden md:flex h-10 px-6 items-center justify-center bg-primary text-white text-sm font-bold uppercase tracking-wider hover:bg-primary-light transition-colors rounded-sm shadow-md no-underline">Agendar
+                    Asesoría <span class="material-symbols-outlined !text-sm ml-1">calendar_month</span></a>
+                <button id="mobile-menu-btn" class="md:hidden text-primary p-2"><span
+                        class="material-symbols-outlined">menu</span></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 px-6">
+            <div class="py-4 flex flex-col gap-4"><a class="nav-link text-sm font-medium text-gray-600"
+                    href="index.html">Inicio</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="servicios.html">Servicios</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="nosotros.html">Nosotros</a><a class="nav-link text-sm font-medium text-gray-600"
+                    href="contacto.html">Contacto</a><a
+                    href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20agendar%20una%20asesor%C3%ADa"
+                    target="_blank"
+                    class="h-10 px-6 flex items-center justify-center bg-primary text-white text-sm font-bold uppercase rounded-sm no-underline">Agendar
+                    Asesoría</a></div>
+        </div>
+    </header>
+    <main class="flex-grow w-full">
+        <!-- HERO ABOUT -->
+        <section class="py-20 px-6 bg-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col lg:flex-row items-center gap-16 reveal">
+                    <div class="lg:w-1/2">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="material-symbols-outlined text-accent-orange !text-sm">verified</span>
+                            <span
+                                class="text-sm font-bold text-gray-800 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider">Consultoría
+                                y Construcción</span>
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-black text-primary tracking-tight leading-tight mb-6">
+                            Ingeniería Civil Industrial con<br />
+                            <span class="text-accent-orange">Visión de Negocio</span>
+                        </h1>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            Somos una empresa de consultoría y construcción conformada por Ingenieros Civiles
+                            Industriales con MBA.
+                            Combinamos la precisión técnica de la ingeniería con la estrategia empresarial para ofrecer
+                            soluciones robustas, eficientes y rentables.
+                        </p>
+                        <div class="flex items-center gap-6 text-sm text-gray-500">
+                            <div class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-primary !text-lg">school</span><span
+                                    class="font-medium">MBA Certificados</span></div>
+                            <div class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-primary !text-lg">architecture</span><span
+                                    class="font-medium">Ingeniería de Precisión</span></div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 relative">
+                        <div class="rounded-sm overflow-hidden shadow-2xl border-4 border-primary/10 relative">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop&q=80"
+                                alt="Ingeniero INGELYV" class="w-full h-80 object-cover" />
+                            <div
+                                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent p-6">
+                                <h3 class="text-white font-bold text-lg">Excelencia Técnica</h3>
+                                <p class="text-gray-300 text-sm">Estándares industriales de alto nivel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUESTRA HISTORIA -->
+        <section class="py-20 px-6 bg-background-light">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-sm font-bold text-accent-orange uppercase tracking-widest">Desde nuestros
+                        inicios</span>
+                    <h2 class="text-4xl font-black text-primary tracking-tight mt-2">Nuestra Historia</h2>
+                    <div class="w-16 h-1 bg-accent-orange mx-auto mt-4 rounded-full"></div>
+                </div>
+                <div class="relative reveal">
+                    <!-- Timeline line -->
+                    <div
+                        class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-primary/20 hidden md:block">
+                    </div>
+                    <!-- Timeline items -->
+                    <div class="space-y-12">
+                        <!-- Item 1 -->
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="md:w-1/2 md:text-right md:pr-12">
+                                <div
+                                    class="bg-white p-8 rounded-sm shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+                                    <span class="text-accent-orange font-black text-2xl">2020</span>
+                                    <h3 class="text-xl font-bold text-primary mt-2 mb-3">El Nacimiento de la Idea</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed">Dos ingenieros civiles industriales
+                                        con MBA, unidos por la pasión de resolver problemas complejos, identificaron una
+                                        brecha en el mercado: las PYMES y empresas emergentes necesitaban consultoría de
+                                        alto nivel pero accesible. Así nació la visión de INGELYV.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:flex w-10 h-10 bg-primary rounded-full items-center justify-center z-10 shrink-0 shadow-lg">
+                                <span class="material-symbols-outlined text-white !text-lg">lightbulb</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="md:w-1/2 md:pr-12"></div>
+                            <div
+                                class="hidden md:flex w-10 h-10 bg-accent-orange rounded-full items-center justify-center z-10 shrink-0 shadow-lg">
+                                <span class="material-symbols-outlined text-white !text-lg">rocket_launch</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <div
+                                    class="bg-white p-8 rounded-sm shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+                                    <span class="text-accent-orange font-black text-2xl">2021</span>
+                                    <h3 class="text-xl font-bold text-primary mt-2 mb-3">Fundación de INGELYV SPA</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed">Con sede en Concepción, Chile,
+                                        INGELYV se constituyó formalmente como una empresa de consultoría y
+                                        construcción.
+                                        Desde el día uno, apostamos por la cercanía con el cliente y la excelencia
+                                        técnica como nuestros pilares diferenciadores.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="md:w-1/2 md:text-right md:pr-12">
+                                <div
+                                    class="bg-white p-8 rounded-sm shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+                                    <span class="text-accent-orange font-black text-2xl">2022 — 2024</span>
+                                    <h3 class="text-xl font-bold text-primary mt-2 mb-3">Consolidación y Crecimiento
+                                    </h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed">Expandimos nuestro portafolio de
+                                        servicios hacia la gestión de licitaciones, inspección técnica de obras (ITO),
+                                        montajes eléctricos y consultoría empresarial integral. Cada proyecto nos
+                                        fortaleció y amplió nuestra red de clientes satisfechos.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:flex w-10 h-10 bg-primary rounded-full items-center justify-center z-10 shrink-0 shadow-lg">
+                                <span class="material-symbols-outlined text-white !text-lg">trending_up</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="md:w-1/2 md:pr-12"></div>
+                            <div
+                                class="hidden md:flex w-10 h-10 bg-accent-orange rounded-full items-center justify-center z-10 shrink-0 shadow-lg">
+                                <span class="material-symbols-outlined text-white !text-lg">star</span>
+                            </div>
+                            <div class="md:w-1/2 md:pl-12">
+                                <div
+                                    class="bg-white p-8 rounded-sm shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+                                    <span class="text-accent-orange font-black text-2xl">2025 — Hoy</span>
+                                    <h3 class="text-xl font-bold text-primary mt-2 mb-3">Presente y Futuro</h3>
+                                    <p class="text-gray-500 text-sm leading-relaxed">Hoy somos un referente regional en
+                                        ingeniería industrial y consultoría estratégica. Seguimos innovando, adoptando
+                                        nuevas tecnologías y metodologías para entregar soluciones de clase mundial a
+                                        nuestros clientes en Chile y la región.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MISIÓN, VISIÓN Y VALORES -->
+        <section class="py-20 px-6 bg-white">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-sm font-bold text-accent-orange uppercase tracking-widest">Lo que nos
+                        define</span>
+                    <h2 class="text-4xl font-black text-primary tracking-tight mt-2">Misión, Visión y Valores</h2>
+                    <div class="w-16 h-1 bg-accent-orange mx-auto mt-4 rounded-full"></div>
+                </div>
+                <!-- Misión y Visión -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 reveal">
+                    <!-- Misión -->
+                    <div
+                        class="relative bg-gradient-to-br from-primary to-primary-light p-10 rounded-sm shadow-xl overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2">
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white/10 rounded-sm flex items-center justify-center mb-6 group-hover:bg-accent-orange transition-colors">
+                                <span class="material-symbols-outlined text-white !text-4xl">flag</span>
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-4">Nuestra Misión</h3>
+                            <p class="text-gray-200 leading-relaxed">Brindar soluciones integrales de ingeniería,
+                                consultoría empresarial y gestión de proyectos industriales que generen valor real para
+                                nuestros clientes. Nos comprometemos a combinar la excelencia técnica con una visión
+                                estratégica de negocio, acompañando a las empresas en cada etapa de su crecimiento con
+                                cercanía, rigor y resultados medibles.</p>
+                        </div>
+                    </div>
+                    <!-- Visión -->
+                    <div
+                        class="relative bg-gradient-to-br from-accent-orange to-amber-600 p-10 rounded-sm shadow-xl overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2">
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white/10 rounded-sm flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                                <span class="material-symbols-outlined text-white !text-4xl">visibility</span>
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-4">Nuestra Visión</h3>
+                            <p class="text-white/90 leading-relaxed">Ser la empresa de consultoría y construcción líder
+                                en
+                                la Región del Biobío y Chile, reconocida por la calidad excepcional de nuestros
+                                servicios, la innovación constante de nuestras soluciones y la confianza que generamos
+                                en cada cliente. Aspiramos a ser el socio estratégico preferido de las empresas que
+                                buscan transformar sus desafíos técnicos en ventajas competitivas.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Valores -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-black text-primary text-center mb-10">Nuestros Valores</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div
+                            class="bg-background-light p-8 rounded-sm border border-gray-200 text-center hover:shadow-xl transition-all group hover:border-primary/30 hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary !text-3xl group-hover:text-white">handshake</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-lg mb-2">Integridad</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Actuamos con transparencia y honestidad en
+                                cada interacción, construyendo relaciones basadas en la confianza mutua.</p>
+                        </div>
+                        <div
+                            class="bg-background-light p-8 rounded-sm border border-gray-200 text-center hover:shadow-xl transition-all group hover:border-primary/30 hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary !text-3xl group-hover:text-white">workspace_premium</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-lg mb-2">Excelencia</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Buscamos la perfección en cada detalle
+                                técnico, aplicando estándares de clase mundial en todos nuestros proyectos.</p>
+                        </div>
+                        <div
+                            class="bg-background-light p-8 rounded-sm border border-gray-200 text-center hover:shadow-xl transition-all group hover:border-primary/30 hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary !text-3xl group-hover:text-white">emoji_objects</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-lg mb-2">Innovación</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Adoptamos nuevas tecnologías y metodologías
+                                para ofrecer soluciones creativas y eficientes a problemas complejos.</p>
+                        </div>
+                        <div
+                            class="bg-background-light p-8 rounded-sm border border-gray-200 text-center hover:shadow-xl transition-all group hover:border-primary/30 hover:-translate-y-1">
+                            <div
+                                class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-primary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-primary !text-3xl group-hover:text-white">diversity_3</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-lg mb-2">Compromiso</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Nos involucramos profundamente con cada
+                                proyecto, tratando los desafíos de nuestros clientes como propios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INDUSTRIAL BANNER -->
+        <section class="relative h-64 md:h-80 overflow-hidden reveal">
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?w=1200&h=600&fit=crop&q=80');">
+            </div>
+            <div class="absolute inset-0 bg-primary/70"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+                <span class="material-symbols-outlined text-white/30 !text-[60px] mb-4">engineering</span>
+                <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Ingenieros que Resuelven</h2>
+                <p class="text-gray-300 mt-3 max-w-2xl">Más que una consultora, somos aliados estratégicos que entienden
+                    tu negocio y trabajan codo a codo contigo para alcanzar resultados extraordinarios.</p>
+            </div>
+        </section>
+
+        <!-- NUESTRO EQUIPO -->
+        <section class="py-20 px-6 bg-background-light" id="equipo">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-sm font-bold text-accent-orange uppercase tracking-widest">Las personas detrás de
+                        INGELYV</span>
+                    <h2 class="text-4xl font-black text-primary tracking-tight mt-2">Nuestro Equipo</h2>
+                    <div class="w-16 h-1 bg-accent-orange mx-auto mt-4 rounded-full"></div>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Un equipo de profesionales apasionados por la
+                        ingeniería y la gestión empresarial, comprometidos con la excelencia y los resultados.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto reveal">
+                    <!-- Perfil Germán -->
+                    <div
+                        class="bg-white rounded-sm shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all hover:-translate-y-2">
+                        <div class="relative h-80 overflow-hidden">
+                            <img src="Profe German Camisa Azul sin Lentes.jpg"
+                                alt="Germán Villa Dupretts - Socio Fundador INGELYV"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <h3 class="text-2xl font-black text-white">Germán Villa Dupretts</h3>
+                                <p class="text-accent-orange font-bold text-sm uppercase tracking-wider mt-1">Socio
+                                    Fundador & CEO</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">Ing.
+                                    Civil Industrial</span>
+                                <span
+                                    class="bg-accent-orange/10 text-accent-orange text-xs font-bold px-3 py-1 rounded-full">MBA</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-6">Ingeniero Civil Industrial con MBA,
+                                especializado en gestión estratégica de proyectos industriales, consultoría empresarial
+                                y desarrollo de negocios. Lidera la visión y estrategia de INGELYV con un enfoque
+                                orientado a resultados y a la creación de valor para los clientes.</p>
+                            <div class="flex items-center gap-3">
+                                <a href="https://linkedin.com" target="_blank"
+                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-all">
+                                    <span class="material-symbols-outlined !text-lg">open_in_new</span>
+                                </a>
+                                <a href="mailto:contacto@ingelyv.cl"
+                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-all">
+                                    <span class="material-symbols-outlined !text-lg">mail</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Perfil Igor -->
+                    <div
+                        class="bg-white rounded-sm shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all hover:-translate-y-2">
+                        <div class="relative h-80 overflow-hidden">
+                            <img src="Igor Labbe Sepulveda INGELYV.jpg"
+                                alt="Igor Labbé Sepúlveda - Socio Fundador INGELYV"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <h3 class="text-2xl font-black text-white">Igor Labbé Sepúlveda</h3>
+                                <p class="text-accent-orange font-bold text-sm uppercase tracking-wider mt-1">Socio
+                                    Fundador & CTO</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">Ing.
+                                    Civil Industrial</span>
+                                <span
+                                    class="bg-accent-orange/10 text-accent-orange text-xs font-bold px-3 py-1 rounded-full">MBA</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-6">Ingeniero Civil Industrial con MBA,
+                                experto en ingeniería de detalle, gestión técnica de obras e inspección industrial.
+                                Aporta el rigor técnico y la supervisión de excelencia que caracterizan a cada proyecto
+                                de INGELYV.</p>
+                            <div class="flex items-center gap-3">
+                                <a href="https://linkedin.com" target="_blank"
+                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-all">
+                                    <span class="material-symbols-outlined !text-lg">open_in_new</span>
+                                </a>
+                                <a href="mailto:contacto@ingelyv.cl"
+                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-white transition-all">
+                                    <span class="material-symbols-outlined !text-lg">mail</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CTA STRIP -->
+        <section class="bg-primary py-16 px-6">
+            <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 reveal">
+                <div>
+                    <h2 class="text-3xl font-black text-white mb-2">¿Tienes un desafío técnico?</h2>
+                    <p class="text-gray-300">Asesórate con un experto hoy mismo.</p>
+                </div>
+                <a href="https://wa.me/56953239879?text=Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20sus%20servicios"
+                    target="_blank"
+                    class="shrink-0 h-12 px-8 bg-accent-orange hover:bg-accent-orange-hover text-white text-sm font-bold uppercase tracking-wider transition-all rounded-sm flex items-center gap-2 no-underline shadow-lg">
+                    <span>Contactar Especialista</span>
+                    <span class="material-symbols-outlined !text-lg">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/56953239879" target="_blank"
+        class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#25D366] hover:bg-[#128C7E] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all no-underline group"
+        title="Chatea con nosotros por WhatsApp">
+        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full"></span>
+    </a>
+
+    <footer class="bg-primary text-white pt-20 pb-10 border-t-4 border-accent-orange">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-12 mb-16">
+                <div class="max-w-sm">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="Logo INGELYV SPA.png" alt="INGELYV SPA" class="h-14 w-auto object-contain">
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Ingeniería con visión estratégica.
+                        Transformamos desafíos industriales en oportunidades de crecimiento.</p>
+                    <div class="flex gap-4"><a
+                            class="w-10 h-10 flex items-center justify-center rounded-sm bg-white/10 hover:bg-accent-orange transition-colors"
+                            href="#"><span class="material-symbols-outlined !text-[20px]">public</span></a><a
+                            class="w-10 h-10 flex items-center justify-center rounded-sm bg-white/10 hover:bg-accent-orange transition-colors"
+                            href="#"><span class="material-symbols-outlined !text-[20px]">rss_feed</span></a></div>
+                </div>
+                <div class="grid grid-cols-2 gap-10 md:gap-20">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4 text-accent-orange">Contacto</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">location_on</span>Av.
+                                O'Higgins 1186, Of 602<br />Concepción, Chile</li>
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">mail</span>contacto@ingelyv.cl
+                            </li>
+                            <li class="flex items-start gap-2"><span
+                                    class="material-symbols-outlined !text-sm text-accent-orange mt-0.5">phone</span>+56
+                                9 5323 9879</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4 text-accent-orange">Menú</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li><a class="hover:text-white transition-colors" href="index.html">Inicio</a></li>
+                            <li><a class="hover:text-white transition-colors" href="servicios.html">Servicios</a></li>
+                            <li><a class="hover:text-white transition-colors" href="nosotros.html">Nosotros</a></li>
+                            <li><a class="hover:text-white transition-colors" href="contacto.html">Contacto</a></li>
+                            <li><a class="hover:text-white transition-colors" href="#">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div
+                class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <p>Copyright © 2024 INGELYV. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-1"><span
+                        class="material-symbols-outlined !text-xs text-green-400">lock</span><span>Sitio Seguro</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
