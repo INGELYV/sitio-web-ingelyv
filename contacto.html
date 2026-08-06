@@ -5,8 +5,10 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Contacto - INGELYV</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
     <meta name="description"
-        content="Contáctanos para resolver tus necesidades de ingeniería industrial y construcción. Nuestro equipo experto está listo para optimizar tus procesos.">
+        content="Contáctanos para tus proyectos de Registro Empresarial Full, desarrollo de Sitios Web Corporativos o Soluciones de Automatización e IA.">
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
@@ -33,7 +35,7 @@
     <header class="sticky top-0 z-50 w-full bg-background-dark/95 backdrop-blur-sm border-b border-border-dark">
         <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3 text-white no-underline">
-                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Ingenieros que Resuelven"
+                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Registro Empresarial, Web & IA"
                     class="h-12 w-auto object-contain">
             </a>
             <nav class="hidden md:flex items-center gap-8">
@@ -69,15 +71,13 @@
                     <div class="lg:w-1/2">
                         <div class="flex items-center gap-2 mb-6">
                             <span class="w-2 h-2 bg-primary rounded-full"></span>
-                            <span class="text-sm font-bold text-gray-300 uppercase tracking-widest">Ingeniería
-                                Industrial</span>
+                            <span class="text-sm font-bold text-gray-300 uppercase tracking-widest">Atención Especializada</span>
                         </div>
                         <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6">
-                            Hablemos de tu<br />próximo <span class="text-primary italic">desafío</span>
+                            Hablemos de tu<br />próximo <span class="text-primary italic">proyecto</span>
                         </h1>
                         <p class="text-gray-400 text-lg leading-relaxed mb-12">
-                            Contáctanos para resolver tus necesidades de ingeniería industrial y construcción. Nuestro
-                            equipo experto está listo para optimizar tus procesos.
+                            Contáctanos para formalizar tu empresa, desarrollar tu sitio web corporativo o integrar soluciones inteligentes de automatización e IA. Nuestro equipo está listo para ayudarte a escalar.
                         </p>
                         <!-- Contact Cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -125,12 +125,12 @@
                                     <div>
                                         <label class="text-sm font-medium text-gray-300 mb-1.5 block">Nombre
                                             completo</label>
-                                        <input id="name" type="text" placeholder="Ej. Juan Perez"
+                                        <input id="name" type="text" placeholder="Ej. Juan Pérez"
                                             class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
                                     </div>
                                     <div>
-                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Empresa</label>
-                                        <input id="company" type="text" placeholder="Ej. Constructora Ltda."
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Empresa / Emprendimiento</label>
+                                        <input id="company" type="text" placeholder="Ej. Mi Empresa SpA"
                                             class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
                                     </div>
                                 </div>
@@ -141,27 +141,30 @@
                                             class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0" />
                                     </div>
                                     <div>
-                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Sector</label>
-                                        <select id="sector"
+                                        <label class="text-sm font-medium text-gray-300 mb-1.5 block">Servicio de interés</label>
+                                         <select id="sector"
                                             class="form-input w-full h-11 px-4 bg-background-dark border border-border-dark text-gray-400 text-sm rounded-sm focus:border-primary focus:ring-0">
-                                            <option>Selecciona una opción</option>
-                                            <option>Minería</option>
-                                            <option>Construcción</option>
-                                            <option>Energía</option>
-                                            <option>Industrial</option>
-                                            <option>Otro</option>
+                                            <option value="">Selecciona una opción</option>
+                                            <option value="registro">Registro Empresarial Full</option>
+                                            <option value="web">Sitios Web Corporativos</option>
+                                            <option value="ia">Automatización e Inteligencia Artificial</option>
+                                            <option value="mercado">Estudios de Mercado</option>
+                                            <option value="factibilidad">Estudios de Factibilidad Técnica y Económica</option>
+                                            <option value="reclutamiento">Reclutamiento Laboral</option>
+                                            <option value="consultoria">Consultoría Empresarial</option>
+                                            <option value="otro">Otro</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div>
                                     <label class="text-sm font-medium text-gray-300 mb-1.5 block">Mensaje</label>
                                     <textarea id="message" rows="4"
-                                        placeholder="Cuéntanos brevemente sobre tu proyecto..."
+                                        placeholder="Cuéntanos brevemente sobre tu requerimiento..."
                                         class="form-input w-full px-4 py-3 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-primary focus:ring-0 resize-none"></textarea>
                                 </div>
                                 <button type="submit"
                                     class="w-full h-12 bg-primary hover:bg-primary/80 text-white text-sm font-bold uppercase tracking-wider transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg">
-                                    <span>Asesorate con un experto</span>
+                                    <span>Enviar Consulta</span>
                                     <span class="material-symbols-outlined !text-lg">arrow_forward</span>
                                 </button>
                             </form>
@@ -183,17 +186,16 @@
                     <span class="material-symbols-outlined text-gray-400 !text-lg">near_me</span>
                 </div>
                 <p class="text-gray-400 text-xs mb-1">Av. O'Higgins 1186, 4070001</p>
-                <p class="text-gray-400 text-xs mb-2">Concepción, Chiguayante, Bío Bío</p>
+                <p class="text-gray-400 text-xs mb-2">Concepción, Bío Bío</p>
                 <a href="#" class="text-primary text-xs font-medium hover:underline">Ampliar el mapa</a>
             </div>
             <div
                 class="absolute bottom-4 left-4 bg-primary/90 backdrop-blur-sm p-4 rounded-sm max-w-xs border border-primary">
                 <div class="flex items-center gap-2 mb-1"><span
                         class="material-symbols-outlined text-white !text-lg">flag</span>
-                    <h3 class="font-bold text-white text-sm">Ubicación Estratégica</h3>
+                    <h3 class="font-bold text-white text-sm">Oficina Central</h3>
                 </div>
-                <p class="text-gray-200 text-xs">Nuestra oficina en Concepción nos permite una rápida respuesta a
-                    proyectos en la zona sur.</p>
+                <p class="text-gray-200 text-xs">Ubicados estratégicamente en Concepción para atender a clientes de todo Chile.</p>
             </div>
         </section>
     </main>
@@ -209,7 +211,7 @@
                         class="material-symbols-outlined !text-[18px]">share</span></a>
             </div>
             <div class="pt-6 border-t border-border-dark text-center text-xs text-gray-500">
-                <p>© 2024 INGELYV. Todos los derechos reservados.</p>
+                <p>© 2026 INGELYV SPA. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

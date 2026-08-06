@@ -1,27 +1,34 @@
 ---
-description: Despliega el sitio web de INGELYV SPA en Web Host Chile (sube los archivos via FTP)
+description: Despliega el sitio web de INGELYV SPA en Web Host Chile (push a GitHub → GitHub Actions sube via FTP automáticamente)
 ---
 
 # Deploy del sitio web INGELYV SPA
 
-Este workflow sube los archivos del sitio web a Web Host Chile via FTP.
+Este workflow sube los archivos del sitio web a Web Host Chile via GitHub Actions.
+Al hacer push a la rama `main`, GitHub Actions se encarga de sincronizar todos los archivos al servidor FTP automáticamente.
 
 ## Pasos
 
-1. Verificar qué archivos cambiaron revisando la carpeta del proyecto en `c:\Users\INGELYV SPA\Desktop\SITIO WEB INGELYV SPA\SITIO WEB INGELYV SPA`
-
-// turbo
-2. Ejecutar el script de deploy para subir TODOS los archivos:
+1. Hacer commit de todos los cambios pendientes:
 ```powershell
-powershell -ExecutionPolicy Bypass -File "c:\Users\INGELYV SPA\Desktop\SITIO WEB INGELYV SPA\SITIO WEB INGELYV SPA\deploy.ps1"
+git add -A
+git commit -m "update: descripción breve del cambio"
 ```
 
-3. Verificar que el sitio cargue correctamente visitando https://ingelyv.cl en el navegador
+2. Hacer push a GitHub (esto dispara el deploy automático):
+```powershell
+git push origin main
+```
 
-## Información de conexión FTP
+3. Verificar que el workflow de GitHub Actions se ejecutó correctamente visitando:
+   https://github.com/INGELYV/sitio-web-ingelyv/actions
+
+4. Verificar que el sitio cargue correctamente visitando https://ingelyv.cl en el navegador
+
+## Información de conexión FTP (manejada por GitHub Actions)
 - **Servidor:** ftp.ingelyv.cl
 - **Usuario:** deploy@ingelyv.cl
-- **Puerto:** 21
+- **Secreto:** FTP_PASSWORD (configurado en GitHub Secrets)
 - **Directorio destino:** /public_html
 
 ## Archivos del sitio
@@ -31,6 +38,7 @@ powershell -ExecutionPolicy Bypass -File "c:\Users\INGELYV SPA\Desktop\SITIO WEB
 - `contacto.html` - Página de contacto
 - `css/styles.css` - Estilos CSS
 - `js/main.js` - JavaScript
+- `favicon.png` - Favicon (Logo INGELYV)
 - `Logo INGELYV SPA.png` - Logo
 - `img/ecosistema-ingelyv.png` - Imagen ecosistema
 - `Profe German Camisa Azul sin Lentes.jpg` - Foto fundador

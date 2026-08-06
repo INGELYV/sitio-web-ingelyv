@@ -3,7 +3,7 @@ name: 🚀 Deploy Website to FTP
 on:
   push:
     branches:
-      - master # o main, según la rama por defecto
+      - main
 
 jobs:
   web-deploy:
@@ -19,10 +19,8 @@ jobs:
         server: ftp.ingelyv.cl
         username: deploy@ingelyv.cl
         password: ${{ secrets.FTP_PASSWORD }}
-        # Si deseas excluir la carpeta .git y archivos de config:
         exclude: |
           **/.git*
           **/.git*/**
-          **/deploy.ps1
           **/.agents/**
           **/README.md
