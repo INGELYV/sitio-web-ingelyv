@@ -27,9 +27,9 @@ git push origin main
 
 ## Información de conexión FTP (manejada por GitHub Actions)
 - **Servidor:** ftp.ingelyv.cl
-- **Usuario:** deploy@ingelyv.cl
+- **Usuario:** ingelyvc
 - **Secreto:** FTP_PASSWORD (configurado en GitHub Secrets)
-- **Directorio destino:** /public_html
+- **Directorio destino:** public_html/
 
 ## Archivos del sitio
 - `index.html` - Página principal
