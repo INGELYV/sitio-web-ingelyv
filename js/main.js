@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // trigger on load
 
-    // ---- Contact Form Validation ----
+    // ---- Contact Form Validation + Submission ----
+    const CONTACT_WEBHOOK_URL = 'https://n8n-with-ai-assistant-ual6.srv1888763.hstgr.cloud/webhook/contacto-ingelyv';
+
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -73,28 +75,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 valid = false;
             }
 
-            if (valid) {
-                const btn = contactForm.querySelector('button[type="submit"]');
-                if (btn) {
-                    const originalHTML = btn.innerHTML;
-                    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Enviando...';
-                    btn.disabled = true;
+            if (!valid) return;
 
-                    setTimeout(() => {
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const originalHTML = btn ? btn.innerHTML : '';
+
+            if (btn) {
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Enviando...';
+                btn.disabled = true;
+            }
+
+            const payload = {
+                name: name ? name.value.trim() : '',
+                company: company ? company.value.trim() : '',
+                phone: phone ? phone.value.trim() : '',
+                sector: sector ? sector.value : '',
+                message: message ? message.value.trim() : ''
+            };
+
+            fetch(CONTACT_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+                .then((res) => {
+                    if (!res.ok) throw new Error('Respuesta no exitosa del servidor');
+                    if (btn) {
                         btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> ¡Mensaje Enviado!';
                         btn.classList.remove('bg-primary');
                         btn.classList.add('bg-green-600');
-
-                        setTimeout(() => {
+                    }
+                    contactForm.reset();
+                })
+                .catch(() => {
+                    if (btn) {
+                        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Error, intenta de nuevo';
+                        btn.classList.remove('bg-primary');
+                        btn.classList.add('bg-red-600');
+                    }
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        if (btn) {
                             btn.innerHTML = originalHTML;
                             btn.disabled = false;
-                            btn.classList.remove('bg-green-600');
+                            btn.classList.remove('bg-green-600', 'bg-red-600');
                             btn.classList.add('bg-primary');
-                            contactForm.reset();
-                        }, 2500);
-                    }, 1500);
-                }
-            }
+                        }
+                    }, 2500);
+                });
         });
     }
 
