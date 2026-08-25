@@ -54,8 +54,8 @@
                 "@id": "https://www.ingelyv.cl/#organization",
                 "name": "INGELYV SPA",
                 "url": "https://www.ingelyv.cl/",
-                "logo": "https://www.ingelyv.cl/Logo%20INGELYV%20SPA.png",
-                "image": "https://www.ingelyv.cl/Logo%20INGELYV%20SPA.png",
+                "logo": "https://www.ingelyv.cl/img/logo-ingelyv.png",
+                "image": "https://www.ingelyv.cl/img/logo-ingelyv.png",
                 "email": "contacto@ingelyv.cl",
                 "telephone": "+56948004882",
                 "description": "Soluciones integrales en Registro Empresarial Full, Desarrollo de Sitios Web Corporativos y Automatización con Inteligencia Artificial.",
@@ -73,7 +73,7 @@
                 "name": "INGELYV SPA",
                 "parentOrganization": { "@id": "https://www.ingelyv.cl/#organization" },
                 "url": "https://www.ingelyv.cl/",
-                "image": "https://www.ingelyv.cl/Logo%20INGELYV%20SPA.png",
+                "image": "https://www.ingelyv.cl/img/logo-ingelyv.png",
                 "telephone": "+56948004882",
                 "email": "contacto@ingelyv.cl",
                 "priceRange": "$$",
@@ -96,7 +96,7 @@
     <header class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
         <div class="max-w-[1440px] mx-auto px-6 h-24 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-4 text-primary no-underline">
-                <img src="Logo INGELYV SPA.png" alt="INGELYV SPA - Registro Empresarial, Web & IA"
+                <img src="img/logo-ingelyv.png" alt="INGELYV SPA - Registro Empresarial, Web & IA"
                     class="h-16 w-auto object-contain">
             </a>
             <nav class="hidden md:flex items-center gap-8">
@@ -161,7 +161,7 @@
                     <div class="lg:w-1/2 relative">
                         <div class="rounded-sm overflow-hidden shadow-2xl border-4 border-primary/10 relative">
                             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&q=80"
-                                alt="Equipo INGELYV" class="w-full h-80 object-cover" />
+                                alt="Equipo INGELYV" class="w-full h-80 object-cover" loading="lazy" width="800" height="600" />
                             <div
                                 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent p-6">
                                 <h3 class="text-white font-bold text-lg">Excelencia Estratégica</h3>
@@ -380,9 +380,13 @@
                     <div
                         class="bg-white rounded-sm shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all hover:-translate-y-2">
                         <div class="relative h-80 overflow-hidden">
-                            <img src="Profe German Camisa Azul sin Lentes.jpg"
-                                alt="Germán Villa Dupretts - Socio Fundador INGELYV"
-                                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                            <picture>
+                                <source srcset="img/fundador-ceo-ingelyv.webp" type="image/webp">
+                                <img src="img/fundador-ceo-ingelyv.jpg"
+                                    alt="Germán Villa Dupretts - Socio Fundador INGELYV"
+                                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy" width="1024" height="1024" />
+                            </picture>
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent">
                             </div>
@@ -414,7 +418,7 @@
                     <div
                         class="bg-white rounded-sm shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all hover:-translate-y-2">
                         <div class="relative h-80 overflow-hidden">
-                            <img src="Igor Labbe Sepulveda INGELYV.jpg"
+                            <img src="img/fundador-cto-ingelyv.jpg"
                                 alt="Igor Labbé Sepúlveda - Socio Fundador INGELYV"
                                 class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                             <div
@@ -471,7 +475,7 @@
             <div class="flex flex-col md:flex-row justify-between gap-12 mb-16">
                 <div class="max-w-sm">
                     <div class="flex items-center gap-3 mb-6">
-                        <img src="Logo INGELYV SPA.png" alt="INGELYV SPA" class="h-14 w-auto object-contain">
+                        <img src="img/logo-ingelyv.png" alt="INGELYV SPA" class="h-14 w-auto object-contain">
                     </div>
                     <p class="text-gray-300 text-sm leading-relaxed mb-6">Impulsamos empresas mediante formalización legal, presencia web corporativa de alto rendimiento, estrategia y soluciones de Inteligencia Artificial.</p>
                     <div class="flex gap-4"><a
