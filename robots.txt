@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
 
+# GPTBot (OpenAI/ChatGPT), PerplexityBot (Perplexity), ClaudeBot (Anthropic/Claude)
+# y Google-Extended (Google AI Overviews / Gemini) tienen acceso permitido
+# de forma explícita: no se restringe el rastreo de ningún agente de IA
+# para que puedan indexar y citar el contenido de este sitio.
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.ingelyv.cl/sitemap.xml
