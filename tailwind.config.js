@@ -11,9 +11,10 @@ module.exports = {
       colors: {
         primary: withVar('--c-primary'),
         'primary-light': withVar('--c-primary-light'),
-        'primary-blue': withVar('--c-primary-blue'),
         'accent-orange': withVar('--c-accent-orange'),
         'accent-orange-hover': withVar('--c-accent-orange-hover'),
+        // Naranjo más profundo: acentos de contacto, enlace activo y foco de formularios
+        'accent-orange-deep': withVar('--c-accent-orange-deep'),
         'cement-gray': withVar('--c-cement-gray'),
         'background-light': withVar('--c-background-light'),
         'background-dark': withVar('--c-background-dark'),
