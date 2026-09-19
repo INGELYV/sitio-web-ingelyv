@@ -31,9 +31,10 @@
 | Formulario | Sin backend: abre WhatsApp con el mensaje armado + respaldo `mailto:` | Ver §4.6 |
 | Mapa | Iframe de Google Maps (Contacto) | |
 | Build | `npm run build:css` + `scripts/build-dist.sh` | Compila Tailwind y copia los archivos públicos a `dist/` (lista blanca) |
-| CI/CD | GitHub Actions → `cloudflare/wrangler-action@v3` | Cada push a `main` despliega `dist/` a Cloudflare Pages |
+| CI/CD | GitHub Actions | `deploy.yml` publica `dist/` en cada push a `main`; `checks.yml` valida cada PR |
+| Validación | `html-validate` + `scripts/check-site.mjs` | `npm run check`: build, HTML válido, enlaces, SEO, versionado y sitemap |
 
-Las dependencias npm son solo de desarrollo (Tailwind y sus plugins): lo publicado sigue siendo HTML, CSS y JS estáticos. No hay tests ni linter.
+Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-validate): lo publicado sigue siendo HTML, CSS y JS estáticos. No hay tests ni linter.
 
 ---
 
@@ -63,8 +64,11 @@ Las dependencias npm son solo de desarrollo (Tailwind y sus plugins): lo publica
 ├── _headers                # Cabeceras de Cloudflare Pages (caché por ruta)
 ├── robots.txt / sitemap.xml                # SEO: URLs limpias, dominio www, bots de IA permitidos
 ├── scripts/build-dist.sh   # Arma dist/ para Cloudflare Pages (lista blanca)
+├── scripts/check-site.mjs  # Chequeos propios sobre dist/ (enlaces, SEO, ?v=, sitemap)
+├── .htmlvalidate.json      # Configuración de html-validate
 ├── dist/                   # Salida del build (ignorada por git)
 ├── .github/workflows/deploy.yml            # Build + deploy de dist/ a Cloudflare Pages
+├── .github/workflows/checks.yml            # Validaciones en cada PR
 ├── .agents/                # Documentación heredada de Antigravity (deploy, protocolo de navegación)
 └── .gitignore
 ```
@@ -198,6 +202,11 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
   npm run build
   npx serve dist
   ```
+- Validaciones (las mismas que corre el CI en cada PR):
+  ```bash
+  npm run check
+  ```
+  Revisa: build, HTML válido (`html-validate`), un solo `<h1>`, SEO mínimo por página, `rel="noopener"`, `?v=` consistente, referencias locales existentes y sitemap completo.
 - Pages resuelve HTTPS, URLs limpias y `404.html`. Las cabeceras propias van en `_headers` (en la raíz; `build-dist.sh` lo copia): el HTML se revalida siempre y los estáticos se cachean. Para redirecciones dentro del sitio se usa `_redirects`.
 - **Versionado de estáticos:** los enlaces a `css/*` y `js/main.js` llevan `?v=AAAAMMDD`. **Al cambiar CSS o JS hay que subir esa versión en las 5 páginas**, o Cloudflare seguirá sirviendo el archivo antiguo desde caché (ya ocurrió una vez y dejó el tema oscuro de contacto roto).
 - **Conector:** está conectado el conector *Cloudflare Developer Platform* (MCP). Sirve para Workers, KV, R2, D1 y la documentación, pero **no** para Pages: los deploys de Pages van por wrangler o GitHub Actions.
@@ -210,7 +219,6 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
 2. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
 3. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
-4. **Sin tests, linter ni validación** de HTML, enlaces o accesibilidad.
 
 ---
 
@@ -219,7 +227,7 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 **Flujo de trabajo**
 - Trabajar en ramas y en cambios pequeños e iterativos, con PR hacia `main`. Nunca hacer push directo a `main` sin verificar, porque despliega a producción.
 - Antes de crear una rama, hacer `git fetch` y partir de `origin/main`: el `main` local puede estar desactualizado.
-- Verificar cada cambio en el navegador (`npm run build && npx serve dist`), en escritorio y a **375 px** de ancho, y revisar la consola sin errores.
+- Antes de abrir un PR, ejecutar `npm run check`. Verificar además en el navegador (`npx serve dist`), en escritorio y a **375 px** de ancho, y revisar la consola sin errores.
 - Commits en español y descriptivos, con prefijo `update:`, `fix:`, `chore:` o `ci:` cuando aplique.
 - Nunca commitear tokens, `.wrangler/`, `dist/`, `node_modules/`, `css/tailwind.css` ni credenciales.
 
