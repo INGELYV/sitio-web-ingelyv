@@ -44,3 +44,16 @@ git push origin main
 - `Profe German Camisa Azul sin Lentes.jpg` - Foto fundador
 - `Igor Labbe Sepulveda INGELYV.jpg` - Foto fundador
 - `qr_whatsapp_INGELYV.png` - QR WhatsApp
+
+## Migración en curso a Cloudflare Pages
+El mismo workflow (`.github/workflows/deploy.yml`) tiene un segundo job que publica en **Cloudflare Pages** (proyecto `ingelyv` → https://ingelyv.pages.dev) en paralelo al FTP:
+
+- Publica solo `dist/`, que arma `bash scripts/build-dist.sh` con una lista blanca de archivos públicos.
+- Requiere el secret `CLOUDFLARE_API_TOKEN` en GitHub. Si no existe, ese job se omite sin fallar.
+- Deploy manual:
+```powershell
+bash scripts/build-dist.sh
+npx wrangler pages deploy dist --project-name ingelyv --branch main
+```
+- **Nunca** desplegar `.` (la raíz), porque publicaría `CLAUDE.md`, `.agents/` y otros archivos internos.
+- El FTP sigue siendo la producción hasta que `www.ingelyv.cl` se conecte como dominio personalizado del proyecto Pages. Después se retira el job FTP.
