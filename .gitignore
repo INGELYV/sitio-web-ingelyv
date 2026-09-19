@@ -13,3 +13,7 @@ desktop.ini
 # Build output (Cloudflare Pages)
 dist/
 .wrangler/
+
+# Dependencias y CSS compilado
+node_modules/
+css/tailwind.css
