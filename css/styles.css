@@ -1,6 +1,6 @@
 /* ======================================
    INGELYV - Custom Styles
-   Extends TailwindCSS CDN
+   Complementa el Tailwind compilado (css/tailwind.css)
    ====================================== */
 
 /* ---- Base & Design Tokens ---- */
@@ -9,9 +9,9 @@
 :root {
     --c-primary: 0 45 98;
     --c-primary-light: 26 75 138;
-    --c-primary-blue: 0 45 98;
     --c-accent-orange: 255 140 0;
     --c-accent-orange-hover: 230 126 0;
+    --c-accent-orange-deep: 242 105 13;
     --c-cement-gray: 156 163 175;
     --c-background-light: 245 245 248;
     --c-background-dark: 15 15 35;
@@ -108,17 +108,6 @@ body {
     }
 }
 
-/* ---- Service Card Hover (Services Page) ---- */
-.service-card:hover .service-icon-bg {
-    background-color: #FF6B00;
-    color: white;
-}
-
-.service-card:hover {
-    border-color: #000061;
-    transform: translateY(-4px);
-}
-
 /* ---- Blueprint Pattern (Contact Page) ---- */
 .blueprint-pattern {
     background-size: 40px 40px;
@@ -128,10 +117,9 @@ body {
 }
 
 /* ---- Paleta del tema oscuro (contacto.html) ----
-   Equivale al tailwind.config propio que tenía esa página: allí `primary` es naranjo. */
+   Solo ajusta los grises de fondo. `primary` sigue siendo el azul institucional en
+   todo el sitio; los acentos naranjos de esa página usan `accent-orange-deep`. */
 .dark-page {
-    --c-primary: 242 105 13;
-    --c-primary-blue: 0 45 98;
     --c-background-dark: 15 23 42;
     --c-surface-dark: 30 41 59;
     --c-border-dark: 51 65 85;
@@ -182,7 +170,7 @@ body {
 
 /* ---- Active Nav Link ---- */
 .nav-link-active {
-    color: #f2690d !important;
+    color: rgb(var(--c-accent-orange-deep)) !important;
     font-weight: 700 !important;
 }
 
@@ -209,8 +197,8 @@ h6 {
 /* ---- Form focus states (Contact) ---- */
 .form-input:focus {
     outline: none;
-    border-color: #f2690d;
-    box-shadow: 0 0 0 2px rgba(242, 105, 13, 0.2);
+    border-color: rgb(var(--c-accent-orange-deep));
+    box-shadow: 0 0 0 2px rgb(var(--c-accent-orange-deep) / 0.2);
 }
 
 /* ---- Smooth page transitions ---- */

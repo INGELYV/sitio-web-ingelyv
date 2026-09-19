@@ -155,18 +155,19 @@ El mensaje usa el **texto visible** de la opción elegida en `<select id="sector
 | `primary-light` | `#1a4b8a` | Hover de primary y gradientes |
 | `accent-orange` | `#FF8C00` | Acentos, CTA del hero, títulos del footer |
 | `accent-orange-hover` | `#e67e00` | Hover |
+| `accent-orange-deep` | `#f2690d` | Acentos de Contacto, enlace activo del menú y foco de formularios |
 | `background-light` | `#f5f5f8` | Fondo general |
 | `background-dark` | `#0f0f23` | Reservado |
 | `cement-gray` | `#9ca3af` | Solo en `index` y `404` |
 
-**Contacto (tema oscuro):** `.dark-page` redefine las variables `--c-*`: `primary` = `#f2690d` (naranjo), `primary-blue` = `#002D62`, `background-dark` = `#0f172a`, `surface-dark` = `#1e293b` y `border-dark` = `#334155`. ⚠️ En `contacto.html`, `text-primary` es **naranjo**, no azul.
+**Contacto (tema oscuro):** `.dark-page` solo ajusta los grises (`background-dark` = `#0f172a`, `surface-dark` = `#1e293b`, `border-dark` = `#334155`). Sus acentos naranjos usan `accent-orange-deep`, así que **`primary` es el azul institucional en todas las páginas**.
 
 **Tipografía:** Space Grotesk en todo el sitio (`font-display` / `font-body`). Títulos en `font-black`, con `tracking-tight` y a menudo en `uppercase`.
 
 **Radios:** son deliberadamente rectos (`rounded-sm` = 0.125rem). Mantén esa estética.
 
 **Utilidades propias (`styles.css`):** `glass-card`, `hover-lift`, `split-screen-container`/`split-panel`, `blueprint-pattern`, `grid-pattern`, `dark-page`, `reveal`/`reveal.active`, `mobile-menu`/`.open`, `nav-link-active`, `form-input`, `page-fade-in`.
-Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque podría no estar en uso: `service-card`/`service-icon-bg`, `glass-card-dark`, `premium-gradient-bg` y `premium-gradient-text`.
+CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutilizarlo): `glass-card-dark`, `premium-gradient-bg` y `premium-gradient-text`. Las reglas de `service-card` se eliminaron por estar muertas.
 
 **Iconos:** Material Symbols Outlined. El tamaño se fuerza con `!text-sm`, `!text-lg`, `!text-4xl` o `!text-[20px]`.
 
@@ -209,8 +210,7 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
 2. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
 3. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
-4. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`).
-5. **Sin tests, linter ni validación** de HTML, enlaces o accesibilidad.
+4. **Sin tests, linter ni validación** de HTML, enlaces o accesibilidad.
 
 ---
 
