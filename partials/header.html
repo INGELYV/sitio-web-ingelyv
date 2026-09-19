@@ -1,0 +1,39 @@
+<header class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-[1440px] mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 text-primary group cursor-pointer no-underline">
+                <img src="img/logo-ingelyv.png" alt="INGELYV SPA - Registro Empresarial, Web &amp; IA"
+                    class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="index.html">Inicio</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="servicios.html">Servicios</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="nosotros.html">Nosotros</a>
+                <a class="nav-link text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                    href="contacto.html">Contacto</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/56948004882?text={{CTA_MSG}}"
+                    target="_blank" rel="noopener"
+                    class="hidden md:flex h-10 px-6 items-center justify-center bg-primary text-white text-sm font-bold uppercase tracking-wider hover:bg-primary-light transition-colors rounded-sm shadow-md no-underline">{{CTA_LABEL}}</a>
+                <button type="button" id="mobile-menu-btn" class="md:hidden text-primary p-2"><span
+                        class="material-symbols-outlined">menu</span></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 px-6">
+            <div class="py-4 flex flex-col gap-4">
+                <a class="nav-link text-sm font-medium text-gray-600" href="index.html">Inicio</a>
+                <a class="nav-link text-sm font-medium text-gray-600" href="servicios.html">Servicios</a>
+                <a class="nav-link text-sm font-medium text-gray-600" href="nosotros.html">Nosotros</a>
+                <a class="nav-link text-sm font-medium text-gray-600" href="contacto.html">Contacto</a>
+                <a href="https://wa.me/56948004882?text={{CTA_MSG}}"
+                    target="_blank" rel="noopener"
+                    class="h-10 px-6 flex items-center justify-center bg-primary text-white text-sm font-bold uppercase rounded-sm no-underline gap-2">
+                    <span class="material-symbols-outlined text-sm">calendar_month</span>
+                    {{CTA_LABEL}}
+                </a>
+            </div>
+        </div>
+    </header>

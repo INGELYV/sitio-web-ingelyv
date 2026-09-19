@@ -63,6 +63,8 @@ Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-valida
 ├── qr_whatsapp_INGELYV.png                 # QR de WhatsApp (no referenciado por las páginas)
 ├── _headers                # Cabeceras de Cloudflare Pages (caché por ruta)
 ├── robots.txt / sitemap.xml                # SEO: URLs limpias, dominio www, bots de IA permitidos
+├── partials/               # Bloques compartidos: header(-dark), footer, whatsapp, head-common
+├── scripts/build-html.mjs  # Resuelve los includes de partials/ al generar dist/
 ├── scripts/build-dist.sh   # Arma dist/ para Cloudflare Pages (lista blanca)
 ├── scripts/check-site.mjs  # Chequeos propios sobre dist/ (enlaces, SEO, ?v=, sitemap)
 ├── .htmlvalidate.json      # Configuración de html-validate
@@ -130,9 +132,21 @@ Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-valida
 | `contacto.html` | Hero de contacto (info + tarjetas / formulario `#contact-form`) · Mapa (iframe) |
 | `404.html` | Mensaje 404 + enlaces rápidos |
 
-### 5.3 Componentes duplicados (editar en las 5 páginas a la vez)
+### 5.3 Componentes compartidos (`partials/`)
 
-Header y menú móvil · footer · botón flotante de WhatsApp · bloque `<head>` (favicons, fuentes, Tailwind) · `tailwind.config` · JSON-LD de `Organization`/`ProfessionalService` (en 4 páginas). **Excepción:** `contacto.html` usa variantes oscuras del header y footer, así que el cambio se aplica a mano respetando su paleta.
+Ya **no** se duplican: cada página los incluye y `scripts/build-html.mjs` los resuelve al generar `dist/`.
+
+| Parcial | Usado por | Variables |
+|---|---|---|
+| `head-common.html` | las 5 páginas | — |
+| `header.html` | las 4 páginas claras | `CTA_LABEL`, `CTA_MSG` (texto del WhatsApp, ya codificado) |
+| `header-dark.html` | `contacto.html` | `CTA_LABEL`, `CTA_MSG` |
+| `footer.html` | las 5 páginas | `FOOTER_BG` (`bg-primary` o `bg-accent-orange-deep`) |
+| `whatsapp.html` | las 5 páginas | — |
+
+Sintaxis: `<!-- include: header.html CTA_LABEL="Cotizar" CTA_MSG="Hola..." -->`; dentro del parcial las variables van como `{{CTA_LABEL}}`. Se aceptan comillas simples para valores con markup. Si falta una variable o queda un include sin resolver, el build falla.
+
+**Sigue duplicado en cada página:** el `<head>` propio (título, description, canonical, OG) y el JSON-LD.
 
 ### 5.4 Módulos de `js/main.js`
 
@@ -217,8 +231,7 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
 1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
-2. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
-3. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
+2. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
 
 ---
 
@@ -232,11 +245,12 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 - Nunca commitear tokens, `.wrangler/`, `dist/`, `node_modules/`, `css/tailwind.css` ni credenciales.
 
 **Al editar componentes compartidos**
-- Header, footer, botón de WhatsApp, `<head>` y JSON-LD deben cambiarse en **todas las páginas** (respetando la variante oscura de `contacto.html`). Después, hacer grep para confirmar que no quedó ninguna sin actualizar.
+- Header, footer y botón de WhatsApp se editan **una sola vez** en `partials/`. Lo que sigue por página: el `<head>` propio (título, description, canonical, OG) y el JSON-LD.
+- Si agregas clases de Tailwind dentro de `partials/`, ya están cubiertas: esa carpeta se escanea en `tailwind.config.js`.
 - Si cambia un color, editar las variables `--c-*` en `styles.css` (y `.dark-page` si aplica). No hay config inline en el HTML.
 
 **Al agregar una página**
-- Copiar la plantilla completa de una página clara (p. ej. `servicios.html`), con `lang="es-CL"`.
+- Copiar una página clara (p. ej. `servicios.html`), con `lang="es-CL"`: ya trae los includes de header, footer y WhatsApp.
 - Actualizar `<title>`, description, canonical (URL limpia), `og:*`/`twitter:*` y JSON-LD.
 - Agregar el enlace en el nav de escritorio, el menú móvil y el footer de todas las páginas.
 - Agregarla a `sitemap.xml`. `build-dist.sh` ya copia todos los `*.html`.

@@ -8,7 +8,8 @@ cd "$(dirname "$0")/.."
 rm -rf dist
 mkdir -p dist
 
-cp ./*.html dist/
+# El HTML se genera resolviendo los parciales de partials/
+node scripts/build-html.mjs
 cp favicon.ico favicon.png qr_whatsapp_INGELYV.png dist/
 cp robots.txt sitemap.xml dist/
 cp -r css js img dist/
