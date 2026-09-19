@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ---- Año del copyright ----
+    // El HTML trae un año escrito para quien navegue sin JS; aquí solo se actualiza.
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+
     // ---- Scroll Reveal ----
     const revealElements = document.querySelectorAll('.reveal');
 
