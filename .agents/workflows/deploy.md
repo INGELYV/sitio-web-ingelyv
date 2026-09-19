@@ -1,59 +1,33 @@
 ---
-description: Despliega el sitio web de INGELYV SPA en Web Host Chile (push a GitHub → GitHub Actions sube via FTP automáticamente)
+description: Despliega el sitio web de INGELYV SPA en Cloudflare Pages (push a main → GitHub Actions → wrangler)
 ---
 
-# Deploy del sitio web INGELYV SPA
+# Deploy del sitio web INGELYV SPA (Cloudflare Pages)
 
-Este workflow sube los archivos del sitio web a Web Host Chile via GitHub Actions.
-Al hacer push a la rama `main`, GitHub Actions se encarga de sincronizar todos los archivos al servidor FTP automáticamente.
+El sitio se publica en **Cloudflare Pages**, proyecto `ingelyv` (https://ingelyv.pages.dev), con los dominios `www.ingelyv.cl` e `ingelyv.cl`.
+Solo se publica la carpeta `dist/`, que arma `scripts/build-dist.sh` con una lista blanca de archivos públicos.
 
-## Pasos
+## Opción 1: Automático (recomendado)
+Todo push a `main` ejecuta `.github/workflows/deploy.yml`: build de `dist/` y `wrangler pages deploy`.
+Lo habitual es trabajar en una rama y hacer merge de un PR hacia `main`.
 
-1. Hacer commit de todos los cambios pendientes:
-```powershell
-git add -A
-git commit -m "update: descripción breve del cambio"
-```
+- Requiere el secret `CLOUDFLARE_API_TOKEN` en GitHub (token con permiso *Account → Cloudflare Pages → Edit*).
+- Se puede ejecutar a mano desde GitHub → Actions → *Deploy Website to Cloudflare Pages* → **Run workflow**.
+- Revisar el resultado en https://github.com/INGELYV/sitio-web-ingelyv/actions
 
-2. Hacer push a GitHub (esto dispara el deploy automático):
-```powershell
-git push origin main
-```
-
-3. Verificar que el workflow de GitHub Actions se ejecutó correctamente visitando:
-   https://github.com/INGELYV/sitio-web-ingelyv/actions
-
-4. Verificar que el sitio cargue correctamente visitando https://ingelyv.cl en el navegador
-
-## Información de conexión FTP (manejada por GitHub Actions)
-- **Servidor:** ftp.ingelyv.cl
-- **Usuario:** ingelyvc
-- **Secreto:** FTP_PASSWORD (configurado en GitHub Secrets)
-- **Directorio destino:** public_html/
-
-## Archivos del sitio
-- `index.html` - Página principal
-- `servicios.html` - Página de servicios
-- `nosotros.html` - Página sobre nosotros
-- `contacto.html` - Página de contacto
-- `css/styles.css` - Estilos CSS
-- `js/main.js` - JavaScript
-- `favicon.png` - Favicon (Logo INGELYV)
-- `Logo INGELYV SPA.png` - Logo
-- `img/ecosistema-ingelyv.png` - Imagen ecosistema
-- `Profe German Camisa Azul sin Lentes.jpg` - Foto fundador
-- `Igor Labbe Sepulveda INGELYV.jpg` - Foto fundador
-- `qr_whatsapp_INGELYV.png` - QR WhatsApp
-
-## Migración en curso a Cloudflare Pages
-El mismo workflow (`.github/workflows/deploy.yml`) tiene un segundo job que publica en **Cloudflare Pages** (proyecto `ingelyv` → https://ingelyv.pages.dev) en paralelo al FTP:
-
-- Publica solo `dist/`, que arma `bash scripts/build-dist.sh` con una lista blanca de archivos públicos.
-- Requiere el secret `CLOUDFLARE_API_TOKEN` en GitHub. Si no existe, ese job se omite sin fallar.
-- Deploy manual:
+## Opción 2: Manual (wrangler)
 ```powershell
 bash scripts/build-dist.sh
 npx wrangler pages deploy dist --project-name ingelyv --branch main
 ```
-- **Nunca** desplegar `.` (la raíz), porque publicaría `CLAUDE.md`, `.agents/` y otros archivos internos.
-- El FTP sigue siendo la producción hasta que `www.ingelyv.cl` se conecte como dominio personalizado del proyecto Pages. Después se retira el job FTP.
+
+> **Importante:** nunca desplegar `.` (la raíz), porque publicaría `CLAUDE.md`, `.agents/` y otros archivos internos.
+
+## Verificación
+- https://ingelyv.pages.dev y https://www.ingelyv.cl cargan las 5 páginas.
+- `https://www.ingelyv.cl/CLAUDE.md` responde 404.
+
+## Notas
+- Cloudflare Pages resuelve HTTPS, las URLs limpias (`/servicios.html` → `/servicios`) y la página `404.html`. Por eso no se usa `.htaccess`.
+- Cabeceras o redirecciones propias: usar los archivos `_headers` / `_redirects` en la raíz; `build-dist.sh` los copia a `dist/` si existen.
+- El formulario de contacto no tiene backend: abre WhatsApp con el mensaje armado y ofrece un respaldo `mailto:`.

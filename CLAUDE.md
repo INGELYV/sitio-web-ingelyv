@@ -2,7 +2,7 @@
 
 > Guía para Claude Code en este repositorio. Describe la arquitectura **tal como está hoy**, los patrones vigentes y las reglas a seguir en cada iteración.
 >
-> Este archivo está excluido de ambos despliegues (FTP y Cloudflare Pages), así que no se publica. Aun así, no escribas aquí secretos ni tokens.
+> Este archivo no se publica: Cloudflare Pages solo recibe `dist/` (lista blanca de `scripts/build-dist.sh`). Aun así, no escribas aquí secretos ni tokens.
 
 ---
 
@@ -11,8 +11,7 @@
 - **Qué es:** sitio corporativo de INGELYV SPA (registro empresarial, sitios web corporativos, automatización e IA, reclutamiento y consultoría), ubicada en Concepción, Chile.
 - **Origen:** creado en Antigravity y migrado a Claude Code.
 - **Dominio:** `https://www.ingelyv.cl` (también `https://ingelyv.cl`). El DNS y el proxy están en Cloudflare.
-- **Hosting actual (producción):** Web Host Chile (Apache), publicado por FTP a `public_html/`.
-- **Hosting destino (migración en curso):** Cloudflare Pages, proyecto `ingelyv` (`https://ingelyv.pages.dev`). Ver §7.
+- **Hosting:** Cloudflare Pages, proyecto `ingelyv` (`https://ingelyv.pages.dev`). El FTP (Web Host Chile) y n8n están **retirados**. Ver §7 para el estado de la conexión del dominio.
 - **Repositorio:** `INGELYV/sitio-web-ingelyv` (público), rama de producción `main`.
 - **Idioma:** español de Chile (`lang="es-CL"`). La documentación también va en español.
 
@@ -29,10 +28,10 @@
 | SEO | JSON-LD (`Organization`, `ProfessionalService` y `FAQPage` en servicios), OG/Twitter, canonical | Imagen OG dedicada: `img/og-ingelyv.png` (1200×630) |
 | Imágenes | `img/` con `<picture>` WebP + fallback JPG/PNG; hero desde Unsplash | |
 | Tipografía / iconos | Google Fonts: **Space Grotesk** + **Material Symbols Outlined** | |
-| Formulario | `fetch` POST JSON a un **webhook de n8n** (externo) | Ver §4.6 |
+| Formulario | Sin backend: abre WhatsApp con el mensaje armado + respaldo `mailto:` | Ver §4.6 |
 | Mapa | Iframe de Google Maps (Contacto) | |
-| Build | `scripts/build-dist.sh` (bash) | Solo para Pages: copia los archivos públicos a `dist/` (lista blanca) |
-| CI/CD | GitHub Actions: job FTP + job Cloudflare Pages | Cada push a `main` despliega |
+| Build | `scripts/build-dist.sh` (bash) | Copia los archivos públicos a `dist/` (lista blanca) |
+| CI/CD | GitHub Actions → `cloudflare/wrangler-action@v3` | Cada push a `main` despliega `dist/` a Cloudflare Pages |
 
 No hay `package.json`, dependencias npm, tests ni linter.
 
@@ -45,7 +44,7 @@ No hay `package.json`, dependencias npm, tests ni linter.
 ├── index.html              # Inicio: hero dividido, ecosistema y 3 pilares
 ├── servicios.html          # 5 tarjetas de servicio + FAQ (con JSON-LD FAQPage) + CTA
 ├── nosotros.html           # Historia (línea de tiempo), misión/visión/valores, banner, equipo, CTA
-├── contacto.html           # TEMA OSCURO: info, formulario #contact-form (n8n), mapa
+├── contacto.html           # TEMA OSCURO: info, formulario #contact-form (WhatsApp/email), mapa
 ├── 404.html                # Página de error con enlaces rápidos
 ├── css/styles.css          # Tokens, utilidades propias y ajustes responsive
 ├── js/main.js              # Menú móvil, enlace activo, reveal, formulario, scroll suave
@@ -58,10 +57,9 @@ No hay `package.json`, dependencias npm, tests ni linter.
 ├── favicon.ico / favicon.png               # Referenciados con ?v=N para evitar caché
 ├── qr_whatsapp_INGELYV.png                 # QR de WhatsApp (no referenciado por las páginas)
 ├── robots.txt / sitemap.xml                # SEO: URLs limpias, dominio www, bots de IA permitidos
-├── .htaccess               # Reglas Apache (HTTPS, URLs limpias, 404, caché). Solo aplica al hosting FTP
 ├── scripts/build-dist.sh   # Arma dist/ para Cloudflare Pages (lista blanca)
 ├── dist/                   # Salida del build (ignorada por git)
-├── .github/workflows/deploy.yml            # Job FTP + job Cloudflare Pages
+├── .github/workflows/deploy.yml            # Build + deploy de dist/ a Cloudflare Pages
 ├── .agents/                # Documentación heredada de Antigravity (deploy, protocolo de navegación)
 └── .gitignore
 ```
@@ -77,8 +75,8 @@ No hay `package.json`, dependencias npm, tests ni linter.
    - un bloque responsive (`@media (max-width: 767px)` y tablet) que **sobrescribe estilos seleccionando strings de clases de Tailwind** (`section[class*="py-20"]`, `.space-y-12 > div …`) con `!important`.
 3. **Mejora progresiva en JS.** `main.js` registra un único `DOMContentLoaded` y cada módulo se activa solo si existe su elemento (*guard clauses*).
 4. **Design tokens duplicados en dos lugares:** `tailwind.config.theme.extend.colors` (en cada página) y `:root` en `styles.css`. Deben mantenerse sincronizados.
-5. **Enlaces internos con `.html` y URLs públicas limpias.** El HTML enlaza `servicios.html`, `index.html`, etc. El servidor sirve URLs limpias (`/servicios`): hoy lo hace `.htaccess` y en Pages será nativo (Pages redirige `/x.html` → `/x`). Los canonical, OG y `sitemap.xml` usan siempre la forma limpia `https://www.ingelyv.cl/servicios`.
-6. **Formulario con webhook de n8n.** `#contact-form` valida `#name` y `#message` y envía `{name, company, phone, sector, message}` por `fetch` POST (JSON) a `CONTACT_WEBHOOK_URL` (n8n alojado en Hostinger). El botón muestra los estados enviando / enviado / error. Si n8n cae, el formulario falla: el respaldo para el usuario es WhatsApp.
+5. **Enlaces internos con `.html` y URLs públicas limpias.** El HTML enlaza `servicios.html`, `index.html`, etc. Cloudflare Pages sirve URLs limpias de forma nativa (redirige `/x.html` → `/x`). Los canonical, OG y `sitemap.xml` usan siempre la forma limpia `https://www.ingelyv.cl/servicios`.
+6. **Formulario sin backend.** `#contact-form` valida `#name` y `#message`, arma un texto con nombre, empresa, teléfono, servicio y mensaje, y abre `https://wa.me/56948004882?text=…`. Luego muestra `#contact-feedback` con enlaces de respaldo a WhatsApp y `mailto:contacto@ingelyv.cl`, construidos con `textContent` (nunca con `innerHTML` y datos del usuario). No se guarda nada en ningún servidor.
 7. **SEO por página.** `<title>`, `meta description`, `canonical`, Open Graph, Twitter Card y JSON-LD con URL absoluta `https://www.ingelyv.cl/...`, más `sitemap.xml` y `robots.txt`, que permite explícitamente los bots de IA.
 8. **Conversión centrada en WhatsApp.** CTA "Cotizar" en el header, CTA del hero con texto prellenado por servicio y botón flotante verde (con `aria-label`) en todas las páginas.
 
@@ -135,10 +133,10 @@ Header y menú móvil · footer · botón flotante de WhatsApp · bloque `<head>
 | Menú móvil | `#mobile-menu-btn`, `#mobile-menu` | Alterna `.open` y cambia el icono `menu`/`close` |
 | Enlace activo | `.nav-link` + último segmento de `location.pathname` | Agrega `.nav-link-active` si coincide **exactamente** con el `href` (ver deuda 3) |
 | Scroll reveal | `.reveal` | Agrega `.active` cuando el elemento entra en el viewport (−100 px) |
-| Formulario | `#contact-form` con `#name #company #phone #sector #message` | Valida, hace POST al webhook de n8n y muestra el estado en el botón |
+| Formulario | `#contact-form` con `#name #company #phone #sector #message` | Valida, abre WhatsApp con el mensaje y muestra `#contact-feedback` con respaldo por email |
 | Scroll suave | `a[href^="#"]` | Desplaza con un offset de 80 px y cierra el menú móvil |
 
-Los `value` del `<select id="sector">` (`registro, web, ia, consultoria, reclutamiento, otro`) viajan tal cual al webhook: si cambian, hay que actualizar el flujo de n8n que los interpreta.
+El mensaje usa el **texto visible** de la opción elegida en `<select id="sector">`, así que agregar o renombrar servicios no requiere tocar `main.js`.
 
 ---
 
@@ -173,32 +171,27 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 7. Despliegue y entorno
 
-`.github/workflows/deploy.yml` se ejecuta con cada push a `main` (y manualmente con *Run workflow*). **Todo push a `main` es un deploy a producción.** Tiene dos jobs en paralelo:
+`.github/workflows/deploy.yml` se ejecuta con cada push a `main` (y manualmente con *Run workflow*): `bash scripts/build-dist.sh` → `wrangler pages deploy dist --project-name=ingelyv --branch=main`. **Todo push a `main` es un deploy a producción.** Requiere el secret `CLOUDFLARE_API_TOKEN` (permiso *Account → Cloudflare Pages → Edit*).
 
-| Job | Destino | Qué sube | Requisito |
-|---|---|---|---|
-| `web-deploy` (FTP) | Web Host Chile, `public_html/`. **Sirve hoy `www.ingelyv.cl`** | Todo el repo menos lo excluido (`.git*`, `.agents/`, `CLAUDE.md`, `scripts/`, `dist/`, `README.md`) | Secret `FTP_PASSWORD` |
-| `pages-deploy` | Cloudflare Pages, proyecto `ingelyv` (`ingelyv.pages.dev`) | Solo `dist/` (lista blanca de `scripts/build-dist.sh`) | Secret `CLOUDFLARE_API_TOKEN`. Si no existe, el job se omite con un aviso |
-
-**Plan de migración a Cloudflare Pages**
-1. ✅ Job de Pages en paralelo al FTP, publicando solo `dist/`.
-2. ⏳ Crear el API token de Cloudflare (permiso *Cloudflare Pages: Edit*) y guardarlo como secret `CLOUDFLARE_API_TOKEN` en GitHub.
-3. ⏳ Verificar `https://ingelyv.pages.dev`: las 5 páginas, URLs limpias, 404, imágenes, formulario, y que `/CLAUDE.md` y `/.agents/...` den 404.
-4. ⏳ En Cloudflare → Pages → `ingelyv` → *Custom domains*: agregar `www.ingelyv.cl` e `ingelyv.cl`. Este paso es el que cambia la producción.
-5. ⏳ Retirar el job FTP y `.htaccess` (Pages ya resuelve HTTPS, URLs limpias y la 404). Si se necesitan cabeceras o redirecciones, usar `_headers` y `_redirects`, que `build-dist.sh` copia si existen.
+**Estado de la migración**
+1. ✅ Deploy automático a Pages publicando solo `dist/`. FTP y n8n retirados.
+2. ⏳ Crear el API token de Cloudflare y guardarlo como secret `CLOUDFLARE_API_TOKEN` en GitHub.
+3. ⏳ Verificar `https://ingelyv.pages.dev`: las 5 páginas, URLs limpias, 404, imágenes y formulario, y que `/CLAUDE.md` y `/.agents/...` den 404.
+4. ⏳ En Cloudflare → Workers & Pages → `ingelyv` → *Custom domains*: agregar `www.ingelyv.cl` e `ingelyv.cl`. Hasta este paso, el dominio sigue apuntando al hosting antiguo.
 
 **Comandos**
-- Deploy manual a Pages:
+- Deploy manual:
   ```bash
   bash scripts/build-dist.sh
   npx wrangler pages deploy dist --project-name ingelyv --branch main
   ```
-- **Nunca desplegar `.`** (la raíz) a Pages. Si agregas un recurso público fuera de `css/`, `js/` o `img/`, súmalo a la lista blanca de `build-dist.sh`. Si agregas un archivo interno en la raíz, súmalo al `exclude` del job FTP.
+- **Nunca desplegar `.`** (la raíz). Si agregas un recurso público fuera de `css/`, `js/` o `img/`, súmalo a la lista blanca de `build-dist.sh`.
 - Preview local:
   ```bash
   bash scripts/build-dist.sh
   npx serve dist
   ```
+- Pages resuelve HTTPS, URLs limpias y `404.html`. Para cabeceras o redirecciones propias se usan `_headers` / `_redirects` en la raíz, y `build-dist.sh` los copia si existen.
 - **Conector:** está conectado el conector *Cloudflare Developer Platform* (MCP). Sirve para Workers, KV, R2, D1 y la documentación, pero **no** para Pages: los deploys de Pages van por wrangler o GitHub Actions.
 - **GitHub:** usar la CLI `gh` (sesión de la cuenta INGELYV). Nunca guardar tokens en la URL del remoto.
 
@@ -206,10 +199,10 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
-1. **Migración de hosting a medias.** Hay dos destinos activos (FTP y Pages) hasta completar §7. Cuidar que ningún archivo interno quede publicado en ninguno de los dos.
+1. **Migración pendiente de cierre.** Hasta completar §7 (token y dominio), `www.ingelyv.cl` sigue sirviendo una versión antigua desde el hosting anterior, que ya no se puede actualizar.
 2. **Tailwind Play CDN en producción.** No está pensado para producción: implica JS de runtime, un flash sin estilos y peor rendimiento. Migrar a Tailwind CLI con un CSS compilado; encaja con el paso de build de `dist/`.
 3. **Enlace activo roto con URLs limpias.** `main.js` compara el último segmento de la ruta (`servicios`) con el `href` (`servicios.html`), así que en producción no se marca la página actual. Normalizar quitando `.html` y tratando `/` como `index`.
-4. **Formulario dependiente de n8n** (webhook público, sin anti-spam ni respaldo). Si n8n falla, se pierde la consulta. Evaluar un respaldo (WhatsApp o `mailto`) y protección contra spam, por ejemplo Cloudflare Turnstile.
+4. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
 5. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
 6. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
 7. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
@@ -237,7 +230,7 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 - Agregarla a `sitemap.xml`. `build-dist.sh` ya copia todos los `*.html`.
 
 **Al tocar el formulario**
-- Mantener sincronizados los `value` del `<select id="sector">` con el flujo de n8n.
+- El texto del WhatsApp y del email se arma en `main.js`: si cambias los campos del formulario, actualiza también ese módulo.
 - Tratar toda entrada del usuario como no confiable: nada de `innerHTML` con valores del formulario.
 
 **Estilos e imágenes**

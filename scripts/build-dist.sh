@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Arma dist/ solo con los archivos públicos del sitio (lista blanca) para Cloudflare Pages.
-# Todo lo que no esté aquí (CLAUDE.md, .agents/, .github/, scripts/, .htaccess…) NO se publica.
+# Todo lo que no esté aquí (CLAUDE.md, .agents/, .github/, scripts/…) NO se publica.
 # Si agregas un recurso público fuera de css/, js/ o img/, súmalo a esta lista.
 set -euo pipefail
 cd "$(dirname "$0")/.."
