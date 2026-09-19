@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // trigger on load
 
-    // ---- Contact Form Validation + Submission ----
-    const CONTACT_WEBHOOK_URL = 'https://n8n-with-ai-assistant-ual6.srv1888763.hstgr.cloud/webhook/contacto-ingelyv';
+    // ---- Contact Form: WhatsApp + Email (sin backend) ----
+    const WHATSAPP_NUMBER = '56948004882';
+    const CONTACT_EMAIL = 'contacto@ingelyv.cl';
 
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -77,53 +78,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!valid) return;
 
-            const btn = contactForm.querySelector('button[type="submit"]');
-            const originalHTML = btn ? btn.innerHTML : '';
+            const nameVal = name ? name.value.trim() : '';
+            const companyVal = company ? company.value.trim() : '';
+            const phoneVal = phone ? phone.value.trim() : '';
+            const sectorText = sector && sector.value
+                ? sector.options[sector.selectedIndex].text
+                : 'No especificado';
+            const messageVal = message ? message.value.trim() : '';
 
-            if (btn) {
-                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Enviando...';
-                btn.disabled = true;
+            const text =
+                'Nueva consulta - Sitio web INGELYV\n\n' +
+                `Nombre: ${nameVal}\n` +
+                (companyVal ? `Empresa: ${companyVal}\n` : '') +
+                (phoneVal ? `Teléfono: ${phoneVal}\n` : '') +
+                `Servicio: ${sectorText}\n\n` +
+                `Mensaje:\n${messageVal}`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+            const mailUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Consulta web - ' + nameVal)}&body=${encodeURIComponent(text)}`;
+
+            window.open(waUrl, '_blank', 'noopener');
+
+            // Respaldo visible por si el navegador bloquea la ventana (sin innerHTML con datos del usuario)
+            let feedback = document.getElementById('contact-feedback');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.id = 'contact-feedback';
+                feedback.setAttribute('role', 'status');
+                feedback.className = 'mt-4 p-4 rounded-sm bg-green-950/60 border border-green-700/50 text-sm text-gray-300';
+                contactForm.appendChild(feedback);
             }
+            feedback.textContent = '';
 
-            const payload = {
-                name: name ? name.value.trim() : '',
-                company: company ? company.value.trim() : '',
-                phone: phone ? phone.value.trim() : '',
-                sector: sector ? sector.value : '',
-                message: message ? message.value.trim() : ''
-            };
+            const title = document.createElement('p');
+            title.className = 'font-bold text-white mb-1';
+            title.textContent = `¡Gracias, ${nameVal}! Tu consulta está lista.`;
 
-            fetch(CONTACT_WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-                .then((res) => {
-                    if (!res.ok) throw new Error('Respuesta no exitosa del servidor');
-                    if (btn) {
-                        btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> ¡Mensaje Enviado!';
-                        btn.classList.remove('bg-primary');
-                        btn.classList.add('bg-green-600');
-                    }
-                    contactForm.reset();
-                })
-                .catch(() => {
-                    if (btn) {
-                        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Error, intenta de nuevo';
-                        btn.classList.remove('bg-primary');
-                        btn.classList.add('bg-red-600');
-                    }
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        if (btn) {
-                            btn.innerHTML = originalHTML;
-                            btn.disabled = false;
-                            btn.classList.remove('bg-green-600', 'bg-red-600');
-                            btn.classList.add('bg-primary');
-                        }
-                    }, 2500);
-                });
+            const hint = document.createElement('p');
+            hint.className = 'text-xs mb-3';
+            hint.textContent = 'Si WhatsApp no se abrió automáticamente, usa uno de estos enlaces:';
+
+            const links = document.createElement('div');
+            links.className = 'flex flex-wrap gap-2';
+            [
+                { href: waUrl, label: 'Abrir WhatsApp', cls: 'bg-green-600 hover:bg-green-500', blank: true },
+                { href: mailUrl, label: 'Enviar por email', cls: 'bg-white/10 hover:bg-white/20', blank: false }
+            ].forEach(({ href, label, cls, blank }) => {
+                const a = document.createElement('a');
+                a.href = href;
+                a.textContent = label;
+                a.className = `inline-flex items-center px-3 py-1.5 ${cls} text-white rounded-sm font-bold text-xs no-underline transition-colors`;
+                if (blank) {
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                }
+                links.appendChild(a);
+            });
+
+            feedback.append(title, hint, links);
+            contactForm.reset();
         });
     }
 
