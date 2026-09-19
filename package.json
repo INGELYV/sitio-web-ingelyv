@@ -7,7 +7,7 @@
     "build:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --minify",
     "watch:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --watch",
     "build": "npm run build:css && bash scripts/build-dist.sh",
-    "validate:html": "html-validate \"*.html\"",
+    "validate:html": "html-validate \"dist/*.html\"",
     "check": "npm run build && npm run validate:html && node scripts/check-site.mjs"
   },
   "devDependencies": {

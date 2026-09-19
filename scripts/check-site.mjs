@@ -17,6 +17,9 @@ const versions = new Set();
 for (const page of pages) {
   const html = readFileSync(join(DIST, page), 'utf8');
 
+  // 0) Los parciales deben quedar resueltos
+  if (html.includes('<!-- include:')) warn(page, 'quedaron includes sin resolver (¿se copió el HTML crudo?)');
+
   // 1) El Play CDN de Tailwind no debe volver
   if (html.includes('cdn.tailwindcss.com')) warn(page, 'carga Tailwind desde el CDN (debe usar css/tailwind.css)');
 

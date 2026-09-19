@@ -4,7 +4,8 @@
 const withVar = (name) => `rgb(var(${name}) / <alpha-value>)`;
 
 module.exports = {
-  content: ['./*.html', './js/**/*.js'],
+  // partials/ también se escanea: el header, el footer y el botón de WhatsApp viven ahí
+  content: ['./*.html', './partials/**/*.html', './js/**/*.js'],
   darkMode: 'class',
   theme: {
     extend: {
