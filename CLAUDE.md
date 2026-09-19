@@ -60,6 +60,7 @@ Las dependencias npm son solo de desarrollo (Tailwind y sus plugins): lo publica
 │   └── fundador-cto-ingelyv.jpg            # Equipo (nosotros)
 ├── favicon.ico / favicon.png               # Referenciados con ?v=N para evitar caché
 ├── qr_whatsapp_INGELYV.png                 # QR de WhatsApp (no referenciado por las páginas)
+├── _headers                # Cabeceras de Cloudflare Pages (caché por ruta)
 ├── robots.txt / sitemap.xml                # SEO: URLs limpias, dominio www, bots de IA permitidos
 ├── scripts/build-dist.sh   # Arma dist/ para Cloudflare Pages (lista blanca)
 ├── dist/                   # Salida del build (ignorada por git)
@@ -195,7 +196,8 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
   npm run build
   npx serve dist
   ```
-- Pages resuelve HTTPS, URLs limpias y `404.html`. Para cabeceras o redirecciones propias se usan `_headers` / `_redirects` en la raíz, y `build-dist.sh` los copia si existen.
+- Pages resuelve HTTPS, URLs limpias y `404.html`. Las cabeceras propias van en `_headers` (en la raíz; `build-dist.sh` lo copia): el HTML se revalida siempre y los estáticos se cachean. Para redirecciones dentro del sitio se usa `_redirects`.
+- **Versionado de estáticos:** los enlaces a `css/*` y `js/main.js` llevan `?v=AAAAMMDD`. **Al cambiar CSS o JS hay que subir esa versión en las 5 páginas**, o Cloudflare seguirá sirviendo el archivo antiguo desde caché (ya ocurrió una vez y dejó el tema oscuro de contacto roto).
 - **Conector:** está conectado el conector *Cloudflare Developer Platform* (MCP). Sirve para Workers, KV, R2, D1 y la documentación, pero **no** para Pages: los deploys de Pages van por wrangler o GitHub Actions.
 - **GitHub:** usar la CLI `gh` (sesión de la cuenta INGELYV). Nunca guardar tokens en la URL del remoto.
 
