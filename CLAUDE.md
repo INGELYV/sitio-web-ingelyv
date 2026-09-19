@@ -11,7 +11,7 @@
 - **Qué es:** sitio corporativo de INGELYV SPA (registro empresarial, sitios web corporativos, automatización e IA, reclutamiento y consultoría), ubicada en Concepción, Chile.
 - **Origen:** creado en Antigravity y migrado a Claude Code.
 - **Dominio:** `https://www.ingelyv.cl` (también `https://ingelyv.cl`). El DNS y el proxy están en Cloudflare.
-- **Hosting:** Cloudflare Pages, proyecto `ingelyv` (`https://ingelyv.pages.dev`). El FTP (Web Host Chile) y n8n están **retirados**. Ver §7 para el estado de la conexión del dominio.
+- **Hosting:** Cloudflare Pages, proyecto `ingelyv` (`https://ingelyv.pages.dev`). `www.ingelyv.cl` e `ingelyv.cl` son dominios personalizados del proyecto (DNS: CNAME → `ingelyv.pages.dev`, proxied). El FTP (Web Host Chile) y n8n están **retirados**.
 - **Repositorio:** `INGELYV/sitio-web-ingelyv` (público), rama de producción `main`.
 - **Idioma:** español de Chile (`lang="es-CL"`). La documentación también va en español.
 
@@ -173,11 +173,11 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 `.github/workflows/deploy.yml` se ejecuta con cada push a `main` (y manualmente con *Run workflow*): `bash scripts/build-dist.sh` → `wrangler pages deploy dist --project-name=ingelyv --branch=main`. **Todo push a `main` es un deploy a producción.** Requiere el secret `CLOUDFLARE_API_TOKEN` (permiso *Account → Cloudflare Pages → Edit*).
 
-**Estado de la migración**
-1. ✅ Deploy automático a Pages publicando solo `dist/`. FTP y n8n retirados.
-2. ⏳ Crear el API token de Cloudflare y guardarlo como secret `CLOUDFLARE_API_TOKEN` en GitHub.
-3. ⏳ Verificar `https://ingelyv.pages.dev`: las 5 páginas, URLs limpias, 404, imágenes y formulario, y que `/CLAUDE.md` y `/.agents/...` den 404.
-4. ⏳ En Cloudflare → Workers & Pages → `ingelyv` → *Custom domains*: agregar `www.ingelyv.cl` e `ingelyv.cl`. Hasta este paso, el dominio sigue apuntando al hosting antiguo.
+**Migración a Cloudflare Pages: completada (19-09-2026)**
+- Deploy automático con el secret `CLOUDFLARE_API_TOKEN`.
+- Dominios `www.ingelyv.cl` e `ingelyv.cl` activos en *Workers & Pages → ingelyv → Custom domains*, con registros DNS `CNAME → ingelyv.pages.dev` (proxied). Los registros MX/TXT del correo no se tocan.
+- Rollback de emergencia (hosting antiguo): `ingelyv.cl` A → `107.190.131.66` y `www` CNAME → `ingelyv.cl`.
+- Si tras un deploy se ve contenido antiguo, purgar la caché: dominio `ingelyv.cl` → *Caching → Configuration → Purge Everything*.
 
 **Comandos**
 - Deploy manual:
@@ -199,7 +199,7 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
-1. **Migración pendiente de cierre.** Hasta completar §7 (token y dominio), `www.ingelyv.cl` sigue sirviendo una versión antigua desde el hosting anterior, que ya no se puede actualizar.
+1. **Dominio sin versión canónica única.** `ingelyv.cl` y `www.ingelyv.cl` sirven el mismo contenido sin redirigir uno al otro (los canonical apuntan a `www`). Conviene una *Redirect Rule* en Cloudflare de `ingelyv.cl/*` → `https://www.ingelyv.cl/$1` (301).
 2. **Tailwind Play CDN en producción.** No está pensado para producción: implica JS de runtime, un flash sin estilos y peor rendimiento. Migrar a Tailwind CLI con un CSS compilado; encaja con el paso de build de `dist/`.
 3. **Enlace activo roto con URLs limpias.** `main.js` compara el último segmento de la ruta (`servicios`) con el `href` (`servicios.html`), así que en producción no se marca la página actual. Normalizar quitando `.html` y tratando `/` como `index`.
 4. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
