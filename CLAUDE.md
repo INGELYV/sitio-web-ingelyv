@@ -22,7 +22,7 @@
 | Capa | Tecnología | Notas |
 |---|---|---|
 | Marcado | HTML5 estático, multipágina (MPA) | Sin framework ni plantillas |
-| Estilos | Tailwind CSS **Play CDN** (`cdn.tailwindcss.com?plugins=forms,container-queries`) | `tailwind.config` inline en el `<head>` de **cada** página |
+| Estilos | Tailwind CSS **compilado** (`css/tailwind.css`, ~36 KB) | Config en `tailwind.config.js`; se genera con `npm run build:css` y no se versiona |
 | Estilos propios | `css/styles.css` (~500 líneas) | Tokens, utilidades propias y ajustes responsive |
 | Comportamiento | `js/main.js` (JS puro) | Un único script compartido por todas las páginas |
 | SEO | JSON-LD (`Organization`, `ProfessionalService` y `FAQPage` en servicios), OG/Twitter, canonical | Imagen OG dedicada: `img/og-ingelyv.png` (1200×630) |
@@ -30,10 +30,10 @@
 | Tipografía / iconos | Google Fonts: **Space Grotesk** + **Material Symbols Outlined** | |
 | Formulario | Sin backend: abre WhatsApp con el mensaje armado + respaldo `mailto:` | Ver §4.6 |
 | Mapa | Iframe de Google Maps (Contacto) | |
-| Build | `scripts/build-dist.sh` (bash) | Copia los archivos públicos a `dist/` (lista blanca) |
+| Build | `npm run build:css` + `scripts/build-dist.sh` | Compila Tailwind y copia los archivos públicos a `dist/` (lista blanca) |
 | CI/CD | GitHub Actions → `cloudflare/wrangler-action@v3` | Cada push a `main` despliega `dist/` a Cloudflare Pages |
 
-No hay `package.json`, dependencias npm, tests ni linter.
+Las dependencias npm son solo de desarrollo (Tailwind y sus plugins): lo publicado sigue siendo HTML, CSS y JS estáticos. No hay tests ni linter.
 
 ---
 
@@ -46,7 +46,11 @@ No hay `package.json`, dependencias npm, tests ni linter.
 ├── nosotros.html           # Historia (línea de tiempo), misión/visión/valores, banner, equipo, CTA
 ├── contacto.html           # TEMA OSCURO: info, formulario #contact-form (WhatsApp/email), mapa
 ├── 404.html                # Página de error con enlaces rápidos
-├── css/styles.css          # Tokens, utilidades propias y ajustes responsive
+├── css/styles.css          # Tokens (--c-*), utilidades propias y ajustes responsive
+├── css/tailwind.css        # GENERADO por npm run build:css (ignorado por git)
+├── src/tailwind.css        # Entrada de Tailwind (@tailwind base/components/utilities)
+├── tailwind.config.js      # Config de Tailwind (colores vía variables CSS)
+├── package.json            # Scripts de build y dependencias de desarrollo
 ├── js/main.js              # Menú móvil, enlace activo, reveal, formulario, scroll suave
 ├── img/
 │   ├── logo-ingelyv.png                    # Logo (header, footer)
@@ -74,7 +78,7 @@ No hay `package.json`, dependencias npm, tests ni linter.
    - utilidades semánticas reutilizables (`glass-card`, `hover-lift`, etc.);
    - un bloque responsive (`@media (max-width: 767px)` y tablet) que **sobrescribe estilos seleccionando strings de clases de Tailwind** (`section[class*="py-20"]`, `.space-y-12 > div …`) con `!important`.
 3. **Mejora progresiva en JS.** `main.js` registra un único `DOMContentLoaded` y cada módulo se activa solo si existe su elemento (*guard clauses*).
-4. **Design tokens duplicados en dos lugares:** `tailwind.config.theme.extend.colors` (en cada página) y `:root` en `styles.css`. Deben mantenerse sincronizados.
+4. **Design tokens en un solo lugar:** los colores de Tailwind apuntan a variables CSS (`--c-*`) definidas en `:root` de `styles.css`; `.dark-page` (contacto) redefine esas variables para su paleta naranja.
 5. **Enlaces internos con `.html` y URLs públicas limpias.** El HTML enlaza `servicios.html`, `index.html`, etc. Cloudflare Pages sirve URLs limpias de forma nativa (redirige `/x.html` → `/x`). Los canonical, OG y `sitemap.xml` usan siempre la forma limpia `https://www.ingelyv.cl/servicios`.
 6. **Formulario sin backend.** `#contact-form` valida `#name` y `#message`, arma un texto con nombre, empresa, teléfono, servicio y mensaje, y abre `https://wa.me/56948004882?text=…`. Luego muestra `#contact-feedback` con enlaces de respaldo a WhatsApp y `mailto:contacto@ingelyv.cl`, construidos con `textContent` (nunca con `innerHTML` y datos del usuario). No se guarda nada en ningún servidor.
 7. **SEO por página.** `<title>`, `meta description`, `canonical`, Open Graph, Twitter Card y JSON-LD con URL absoluta `https://www.ingelyv.cl/...`, más `sitemap.xml` y `robots.txt`, que permite explícitamente los bots de IA.
@@ -93,8 +97,7 @@ No hay `package.json`, dependencias npm, tests ni linter.
 │   ├── favicons (?v=N)
 │   ├── Open Graph + Twitter Card (img/og-ingelyv.png)
 │   ├── Google Fonts (Space Grotesk, Material Symbols)
-│   ├── <script> Tailwind Play CDN + <script> tailwind.config
-│   ├── css/styles.css
+│   ├── css/tailwind.css (compilado) + css/styles.css
 │   └── <script type="application/ld+json"> (Organization, ProfessionalService[, FAQPage])
 └── <body class="… flex flex-col min-h-screen page-fade-in">   (contacto: + dark-page blueprint-pattern)
     ├── <header> sticky
@@ -154,7 +157,7 @@ El mensaje usa el **texto visible** de la opción elegida en `<select id="sector
 | `background-dark` | `#0f0f23` | Reservado |
 | `cement-gray` | `#9ca3af` | Solo en `index` y `404` |
 
-**Contacto (tema oscuro):** allí `primary` = `#f2690d` (naranjo), `primary-blue` = `#002D62`, `background-dark` = `#0f172a`, `surface-dark` = `#1e293b` y `border-dark` = `#334155`. ⚠️ En `contacto.html`, `text-primary` es **naranjo**, no azul.
+**Contacto (tema oscuro):** `.dark-page` redefine las variables `--c-*`: `primary` = `#f2690d` (naranjo), `primary-blue` = `#002D62`, `background-dark` = `#0f172a`, `surface-dark` = `#1e293b` y `border-dark` = `#334155`. ⚠️ En `contacto.html`, `text-primary` es **naranjo**, no azul.
 
 **Tipografía:** Space Grotesk en todo el sitio (`font-display` / `font-body`). Títulos en `font-black`, con `tracking-tight` y a menudo en `uppercase`.
 
@@ -171,7 +174,7 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 7. Despliegue y entorno
 
-`.github/workflows/deploy.yml` se ejecuta con cada push a `main` (y manualmente con *Run workflow*): `bash scripts/build-dist.sh` → `wrangler pages deploy dist --project-name=ingelyv --branch=main`. **Todo push a `main` es un deploy a producción.** Requiere el secret `CLOUDFLARE_API_TOKEN` (permiso *Account → Cloudflare Pages → Edit*).
+`.github/workflows/deploy.yml` se ejecuta con cada push a `main` (y manualmente con *Run workflow*): `npm ci` → `npm run build:css` → `bash scripts/build-dist.sh` → `wrangler pages deploy dist --project-name=ingelyv --branch=main`. **Todo push a `main` es un deploy a producción.** Requiere el secret `CLOUDFLARE_API_TOKEN` (permiso *Account → Cloudflare Pages → Edit*).
 
 **Migración a Cloudflare Pages: completada (19-09-2026)**
 - Deploy automático con el secret `CLOUDFLARE_API_TOKEN`.
@@ -183,13 +186,13 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 **Comandos**
 - Deploy manual:
   ```bash
-  bash scripts/build-dist.sh
+  npm run build
   npx wrangler pages deploy dist --project-name ingelyv --branch main
   ```
 - **Nunca desplegar `.`** (la raíz). Si agregas un recurso público fuera de `css/`, `js/` o `img/`, súmalo a la lista blanca de `build-dist.sh`.
 - Preview local:
   ```bash
-  bash scripts/build-dist.sh
+  npm run build
   npx serve dist
   ```
 - Pages resuelve HTTPS, URLs limpias y `404.html`. Para cabeceras o redirecciones propias se usan `_headers` / `_redirects` en la raíz, y `build-dist.sh` los copia si existen.
@@ -200,12 +203,11 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
-1. **Tailwind Play CDN en producción.** No está pensado para producción: implica JS de runtime, un flash sin estilos y peor rendimiento. Migrar a Tailwind CLI con un CSS compilado; encaja con el paso de build de `dist/`.
-2. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
-3. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
-4. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
-5. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
-6. **Enlaces `target="_blank"` sin `rel="noopener"`**, y sin tests, linter ni validación de HTML, enlaces o accesibilidad.
+1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
+2. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
+3. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
+4. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
+5. **Enlaces `target="_blank"` sin `rel="noopener"`**, y sin tests, linter ni validación de HTML, enlaces o accesibilidad.
 
 ---
 
@@ -214,13 +216,13 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 **Flujo de trabajo**
 - Trabajar en ramas y en cambios pequeños e iterativos, con PR hacia `main`. Nunca hacer push directo a `main` sin verificar, porque despliega a producción.
 - Antes de crear una rama, hacer `git fetch` y partir de `origin/main`: el `main` local puede estar desactualizado.
-- Verificar cada cambio en el navegador (`bash scripts/build-dist.sh && npx serve dist`), en escritorio y a **375 px** de ancho, y revisar la consola sin errores.
+- Verificar cada cambio en el navegador (`npm run build && npx serve dist`), en escritorio y a **375 px** de ancho, y revisar la consola sin errores.
 - Commits en español y descriptivos, con prefijo `update:`, `fix:`, `chore:` o `ci:` cuando aplique.
-- Nunca commitear tokens, `.wrangler/`, `dist/` ni credenciales.
+- Nunca commitear tokens, `.wrangler/`, `dist/`, `node_modules/`, `css/tailwind.css` ni credenciales.
 
 **Al editar componentes compartidos**
-- Header, footer, botón de WhatsApp, `<head>`, `tailwind.config` y JSON-LD deben cambiarse en **todas las páginas** (respetando la variante oscura de `contacto.html`). Después, hacer grep para confirmar que no quedó ninguna sin actualizar.
-- Si cambia un color, actualizar tanto `tailwind.config` como `:root` en `styles.css`.
+- Header, footer, botón de WhatsApp, `<head>` y JSON-LD deben cambiarse en **todas las páginas** (respetando la variante oscura de `contacto.html`). Después, hacer grep para confirmar que no quedó ninguna sin actualizar.
+- Si cambia un color, editar las variables `--c-*` en `styles.css` (y `.dark-page` si aplica). No hay config inline en el HTML.
 
 **Al agregar una página**
 - Copiar la plantilla completa de una página clara (p. ej. `servicios.html`), con `lang="es-CL"`.
