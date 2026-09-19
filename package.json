@@ -6,11 +6,14 @@
   "scripts": {
     "build:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --minify",
     "watch:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --watch",
-    "build": "npm run build:css && bash scripts/build-dist.sh"
+    "build": "npm run build:css && bash scripts/build-dist.sh",
+    "validate:html": "html-validate \"*.html\"",
+    "check": "npm run build && npm run validate:html && node scripts/check-site.mjs"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.9",
+    "html-validate": "^9.7.1",
     "tailwindcss": "^3.4.17"
   }
 }
