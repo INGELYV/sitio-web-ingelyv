@@ -138,6 +138,7 @@ Header y menú móvil · footer · botón flotante de WhatsApp · bloque `<head>
 | Enlace activo | `.nav-link` + `location.pathname` | Normaliza ambos lados (`/servicios`, `/servicios.html`, `servicios.html` → `servicios`; `/` → `index`) y agrega `.nav-link-active` |
 | Scroll reveal | `.reveal` | Agrega `.active` cuando el elemento entra en el viewport (−100 px) |
 | Formulario | `#contact-form` con `#name #company #phone #sector #message` | Valida, abre WhatsApp con el mensaje y muestra `#contact-feedback` con respaldo por email |
+| Año del © | `#current-year` en el footer | Escribe el año actual; el HTML trae uno de respaldo para quien navegue sin JS |
 | Scroll suave | `a[href^="#"]` | Desplaza con un offset de 80 px y cierra el menú móvil |
 
 El mensaje usa el **texto visible** de la opción elegida en `<select id="sector">`, así que agregar o renombrar servicios no requiere tocar `main.js`.
@@ -208,8 +209,8 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
 2. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
 3. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
-4. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
-5. **Enlaces `target="_blank"` sin `rel="noopener"`**, y sin tests, linter ni validación de HTML, enlaces o accesibilidad.
+4. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`).
+5. **Sin tests, linter ni validación** de HTML, enlaces o accesibilidad.
 
 ---
 
@@ -244,10 +245,11 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 **Accesibilidad y SEO**
 - `alt` descriptivo en imágenes. `aria-label` en botones que solo muestran un icono.
-- Enlaces con `target="_blank"` deben llevar `rel="noopener"`.
+- Enlaces con `target="_blank"` deben llevar `rel="noopener"` (hoy los 24 lo tienen).
 - Un solo `<h1>` por página. Jerarquía de títulos coherente.
 
 **Contenido**
+- El año del © lo actualiza `main.js`; no hay que editarlo a mano.
 - Los datos de contacto (teléfono `+56 9 4800 4882`, `contacto@ingelyv.cl`, dirección) aparecen en muchos lugares (header, hero, footer, JSON-LD, botón flotante). Si cambian, reemplazarlos globalmente con grep.
 
 ---
