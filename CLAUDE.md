@@ -131,7 +131,7 @@ Header y menú móvil · footer · botón flotante de WhatsApp · bloque `<head>
 | Módulo | Disparador / elementos | Efecto |
 |---|---|---|
 | Menú móvil | `#mobile-menu-btn`, `#mobile-menu` | Alterna `.open` y cambia el icono `menu`/`close` |
-| Enlace activo | `.nav-link` + último segmento de `location.pathname` | Agrega `.nav-link-active` si coincide **exactamente** con el `href` (ver deuda 3) |
+| Enlace activo | `.nav-link` + `location.pathname` | Normaliza ambos lados (`/servicios`, `/servicios.html`, `servicios.html` → `servicios`; `/` → `index`) y agrega `.nav-link-active` |
 | Scroll reveal | `.reveal` | Agrega `.active` cuando el elemento entra en el viewport (−100 px) |
 | Formulario | `#contact-form` con `#name #company #phone #sector #message` | Valida, abre WhatsApp con el mensaje y muestra `#contact-feedback` con respaldo por email |
 | Scroll suave | `a[href^="#"]` | Desplaza con un offset de 80 px y cierra el menú móvil |
@@ -177,6 +177,7 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 - Deploy automático con el secret `CLOUDFLARE_API_TOKEN`.
 - Dominios `www.ingelyv.cl` e `ingelyv.cl` activos en *Workers & Pages → ingelyv → Custom domains*, con registros DNS `CNAME → ingelyv.pages.dev` (proxied). Los registros MX/TXT del correo no se tocan.
 - Rollback de emergencia (hosting antiguo): `ingelyv.cl` A → `107.190.131.66` y `www` CNAME → `ingelyv.cl`.
+- Redirect Rule *"Redirect from root to WWW"* (zona `ingelyv.cl` → Rules): `https://ingelyv.cl/*` → `https://www.ingelyv.cl/${1}` (301, conserva la query string). La versión canónica es `www`.
 - Si tras un deploy se ve contenido antiguo, purgar la caché: dominio `ingelyv.cl` → *Caching → Configuration → Purge Everything*.
 
 **Comandos**
@@ -199,14 +200,12 @@ Hay CSS definido que conviene verificar con grep antes de reutilizarlo, porque p
 
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
-1. **Dominio sin versión canónica única.** `ingelyv.cl` y `www.ingelyv.cl` sirven el mismo contenido sin redirigir uno al otro (los canonical apuntan a `www`). Conviene una *Redirect Rule* en Cloudflare de `ingelyv.cl/*` → `https://www.ingelyv.cl/$1` (301).
-2. **Tailwind Play CDN en producción.** No está pensado para producción: implica JS de runtime, un flash sin estilos y peor rendimiento. Migrar a Tailwind CLI con un CSS compilado; encaja con el paso de build de `dist/`.
-3. **Enlace activo roto con URLs limpias.** `main.js` compara el último segmento de la ruta (`servicios`) con el `href` (`servicios.html`), así que en producción no se marca la página actual. Normalizar quitando `.html` y tratando `/` como `index`.
-4. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
-5. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
-6. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
-7. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
-8. **Enlaces `target="_blank"` sin `rel="noopener"`**, y sin tests, linter ni validación de HTML, enlaces o accesibilidad.
+1. **Tailwind Play CDN en producción.** No está pensado para producción: implica JS de runtime, un flash sin estilos y peor rendimiento. Migrar a Tailwind CLI con un CSS compilado; encaja con el paso de build de `dist/`.
+2. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
+3. **Header y footer duplicados en 5 archivos**, con riesgo de desincronización. Considerar parciales en el paso de build.
+4. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
+5. **Tokens inconsistentes:** `primary` cambia de significado en Contacto y hay naranjos distintos (`#FF8C00`, `#f2690d`, `#FF6B00`). El año del © está escrito a mano.
+6. **Enlaces `target="_blank"` sin `rel="noopener"`**, y sin tests, linter ni validación de HTML, enlaces o accesibilidad.
 
 ---
 

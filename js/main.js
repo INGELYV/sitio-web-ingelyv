@@ -18,12 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ---- Active Navigation Link ----
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    // ---- Active Navigation Link (URLs limpias y con .html) ----
+    // "/servicios", "/servicios.html" y "servicios.html" → "servicios"; "/" e "index.html" → "index"
+    const pageKey = (path) => (path || '').split(/[?#]/)[0].split('/').pop().replace(/\.html$/, '') || 'index';
+    const currentPage = pageKey(window.location.pathname);
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        if (pageKey(link.getAttribute('href')) === currentPage) {
             link.classList.add('nav-link-active');
         }
     });
