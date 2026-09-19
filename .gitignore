@@ -9,3 +9,7 @@ desktop.ini
 .idea/
 .agents/
 *.log
+
+# Build output (Cloudflare Pages)
+dist/
+.wrangler/
