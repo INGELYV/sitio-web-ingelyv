@@ -83,7 +83,7 @@ Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-valida
 2. **Utility-first con una capa CSS propia.** El layout y la mayoría de los estilos van con clases de Tailwind en el HTML. `styles.css` agrega:
    - tokens en `:root` (`--color-*`, `--shadow-*`);
    - utilidades semánticas reutilizables (`glass-card`, `hover-lift`, etc.);
-   - un bloque responsive (`@media (max-width: 767px)` y tablet) que **sobrescribe estilos seleccionando strings de clases de Tailwind** (`section[class*="py-20"]`, `.space-y-12 > div …`) con `!important`.
+   - un bloque responsive (`@media (max-width: 767px)` y tablet) que ajusta el diseño móvil mediante **clases semánticas** (`.sec-pad-md`, `.timeline-card`, `.contact-box`, `.whatsapp-float`, …), no mediante strings de clases de Tailwind.
 3. **Mejora progresiva en JS.** `main.js` registra un único `DOMContentLoaded` y cada módulo se activa solo si existe su elemento (*guard clauses*).
 4. **Design tokens en un solo lugar:** los colores de Tailwind apuntan a variables CSS (`--c-*`) definidas en `:root` de `styles.css`; `.dark-page` (contacto) redefine esas variables para su paleta naranja.
 5. **Enlaces internos con `.html` y URLs públicas limpias.** El HTML enlaza `servicios.html`, `index.html`, etc. Cloudflare Pages sirve URLs limpias de forma nativa (redirige `/x.html` → `/x`). Los canonical, OG y `sitemap.xml` usan siempre la forma limpia `https://www.ingelyv.cl/servicios`.
@@ -184,6 +184,8 @@ El mensaje usa el **texto visible** de la opción elegida en `<select id="sector
 
 **Radios:** son deliberadamente rectos (`rounded-sm` = 0.125rem). Mantén esa estética.
 
+**Clases semánticas del bloque responsive:** `.header-inner`, `.hero-cta`, `.eco-image`, `.sec-pad-sm|md|lg`, `.sec-pad-x`, `.timeline-item|col|card|dot`, `.mv-card`, `.value-card`, `.team-grid`, `.team-photo`, `.banner-strip`, `.strip-primary`, `.strip-cta-btn`, `.contact-hero`, `.contact-lead`, `.contact-cards`, `.contact-box`, `.map-section`, `.map-badge-top|bottom`, `.footer-row`, `.footer-cols`, `.whatsapp-float`. Se agregan junto a las clases de Tailwind y solo las usa `@media`.
+
 **Utilidades propias (`styles.css`):** `glass-card`, `hover-lift`, `split-screen-container`/`split-panel`, `blueprint-pattern`, `grid-pattern`, `dark-page`, `reveal`/`reveal.active`, `mobile-menu`/`.open`, `nav-link-active`, `form-input`, `page-fade-in`.
 CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutilizarlo): `glass-card-dark`, `premium-gradient-bg` y `premium-gradient-text`. Las reglas de `service-card` se eliminaron por estar muertas.
 
@@ -231,7 +233,6 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 ## 8. Deuda técnica y riesgos conocidos (priorizados)
 
 1. **Formulario sin registro propio.** Las consultas solo llegan si el usuario envía el WhatsApp o el email; no queda copia. Si en el futuro se necesita, evaluar Cloudflare Pages Functions + Turnstile (anti-spam).
-2. **CSS responsive acoplado a strings de clases Tailwind** (`[class*="…"]` + `!important`). Cambiar una clase en el HTML puede romper silenciosamente el diseño móvil.
 
 ---
 
@@ -261,7 +262,7 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 
 **Estilos e imágenes**
 - Preferir utilidades de Tailwind y las clases propias existentes antes de crear CSS nuevo.
-- No agregar más selectores `[class*="…"]`. Los nuevos ajustes responsive deben usar prefijos `sm:`/`md:`/`lg:`.
+- El bloque responsive de `styles.css` usa **clases semánticas** (ver §6). Si necesitas un ajuste móvil nuevo, usa prefijos `sm:`/`md:`/`lg:` de Tailwind o agrega una clase semántica; **nunca** selectores del tipo `[class*="py-20"]`, que se rompen al editar el HTML.
 - Imágenes nuevas en `img/`, con nombre kebab-case, WebP + fallback y `width`/`height`.
 - Mantener la estética (radios rectos, Space Grotesk, azul/naranjo, glassmorphism sutil).
 
