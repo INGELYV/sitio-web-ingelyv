@@ -78,7 +78,7 @@
     <!-- include: header-dark.html CTA_LABEL="Cotizar" CTA_MSG="Hola%20INGELYV%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n" -->
     <main class="flex-grow w-full">
         <!-- CONTACT HERO -->
-        <section class="py-16 px-6">
+        <section class="py-16 px-6 sec-pad-sm sec-pad-x contact-hero">
             <div class="max-w-[1200px] mx-auto">
                 <div class="flex flex-col lg:flex-row gap-16 reveal">
                     <!-- Left: Info -->
@@ -90,11 +90,11 @@
                         <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6">
                             Hablemos de tu<br />próximo <span class="text-accent-orange-deep italic">proyecto</span>
                         </h1>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-12">
+                        <p class="text-gray-400 text-lg leading-relaxed mb-12 contact-lead">
                             Contáctanos para formalizar tu empresa, desarrollar tu sitio web corporativo o integrar soluciones inteligentes de automatización e IA. Nuestro equipo está listo para ayudarte a escalar.
                         </p>
                         <!-- Contact Cards -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 contact-cards">
                             <div
                                 class="bg-surface-dark border border-border-dark p-6 rounded-sm hover:border-accent-orange-deep/50 transition-colors">
                                 <div class="w-10 h-10 bg-accent-orange-deep/10 rounded-sm flex items-center justify-center mb-4">
@@ -132,7 +132,7 @@
                     <!-- Right: Form -->
                     <div class="lg:w-1/2">
                         <div
-                            class="bg-surface-dark border border-border-dark p-8 md:p-10 rounded-sm border-t-4 border-t-accent-orange-deep">
+                            class="bg-surface-dark border border-border-dark p-8 md:p-10 rounded-sm border-t-4 border-t-accent-orange-deep contact-box">
                             <h2 class="text-2xl font-black text-white mb-8">Envíanos un mensaje</h2>
                             <form id="contact-form" class="space-y-5">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -186,14 +186,14 @@
             </div>
         </section>
         <!-- MAP -->
-        <section class="w-full h-80 md:h-96 relative reveal">
+        <section class="w-full h-80 md:h-96 relative reveal map-section">
             <iframe
                 title="Mapa de la ubicación de INGELYV SPA en Concepción"
                 src="https://maps.google.com/maps?q=Cochrane%20635%2C%20Concepci%C3%B3n%2C%20Chile&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 style="width:100%; height:100%; border:0; filter: saturate(0) contrast(1.1) brightness(0.5);"
                 allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div
-                class="absolute top-4 left-4 bg-surface-dark/95 backdrop-blur-sm border border-border-dark p-4 rounded-sm max-w-xs">
+                class="absolute top-4 left-4 bg-surface-dark/95 backdrop-blur-sm border border-border-dark p-4 rounded-sm max-w-xs map-badge-top">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="font-bold text-white text-sm">Cochrane 635</h3>
                     <span class="material-symbols-outlined text-gray-400 !text-lg">near_me</span>
@@ -203,7 +203,7 @@
                 <a href="https://maps.google.com/?q=Cochrane+635,+Concepción,+Chile" target="_blank" rel="noopener" class="text-accent-orange-deep text-xs font-medium hover:underline">Ampliar el mapa</a>
             </div>
             <div
-                class="absolute bottom-4 left-4 bg-accent-orange-deep/90 backdrop-blur-sm p-4 rounded-sm max-w-xs border border-accent-orange-deep">
+                class="absolute bottom-4 left-4 bg-accent-orange-deep/90 backdrop-blur-sm p-4 rounded-sm max-w-xs border border-accent-orange-deep map-badge-bottom">
                 <div class="flex items-center gap-2 mb-1"><span
                         class="material-symbols-outlined text-white !text-lg">flag</span>
                     <h3 class="font-bold text-white text-sm">Oficina Central</h3>
@@ -215,7 +215,7 @@
     <!-- FOOTER (Dark) -->
     <!-- include: footer.html FOOTER_BG="bg-accent-orange-deep" -->
     <!-- include: whatsapp.html -->
-    <script src="js/main.js?v=20260921"></script>
+    <script src="js/main.js?v=20260922"></script>
 </body>
 
 </html>

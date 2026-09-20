@@ -226,13 +226,13 @@ h6 {
 @media (max-width: 767px) {
 
     /* -- Header: reduce height on mobile -- */
-    header .max-w-\[1440px\] {
+    .header-inner {
         height: 64px !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
 
-    header .max-w-\[1440px\] img {
+    .header-inner img {
         height: 44px !important;
     }
 
@@ -262,7 +262,7 @@ h6 {
     }
 
     /* -- Hero CTA buttons: full width on mobile -- */
-    .split-panel a[class*="h-12"] {
+    .hero-cta {
         width: 100% !important;
         max-width: 300px;
         height: 48px !important;
@@ -289,158 +289,153 @@ h6 {
     }
 
     /* -- Section padding: reduce on mobile -- */
-    section[class*="py-20"] {
+    .sec-pad-md {
         padding-top: 48px !important;
         padding-bottom: 48px !important;
     }
 
-    section[class*="py-24"] {
+    .sec-pad-lg {
         padding-top: 56px !important;
         padding-bottom: 56px !important;
     }
 
-    section[class*="py-16"] {
+    .sec-pad-sm {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
     }
 
-    section[class*="px-6"] {
+    .sec-pad-x {
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
 
     /* -- Ecosistema section: tighter on mobile -- */
-    .reveal.max-w-5xl img {
+    .eco-image img {
         border-radius: 4px;
     }
 
     /* -- Nosotros: Timeline adjustments -- */
-    .space-y-12 > div {
+    .timeline-item {
         gap: 16px !important;
     }
 
     /* Timeline cards: full width and proper padding */
-    .space-y-12 > div > div[class*="md:w-1/2"] {
+    .timeline-col {
         width: 100% !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
         text-align: left !important;
     }
 
-    .space-y-12 > div > div[class*="md:w-1/2"] > div[class*="bg-white"] {
+    .timeline-card {
         padding: 20px !important;
     }
 
     /* Hide timeline center line on mobile */
-    .space-y-12 > div > div[class*="hidden md:flex"][class*="rounded-full"] {
+    .timeline-dot {
         display: none !important;
     }
 
     /* -- Nosotros: Mission/Vision cards -- */
-    div[class*="from-primary"][class*="p-10"],
-    div[class*="from-accent-orange"][class*="p-10"] {
+    .mv-card {
         padding: 24px !important;
     }
 
     /* -- Nosotros: Values grid -- */
-    div[class*="lg:grid-cols-4"] > div[class*="p-8"] {
+    .value-card {
         padding: 20px !important;
     }
 
     /* -- Nosotros: Team cards -- */
-    div[class*="md:grid-cols-2"][class*="gap-10"] {
+    .team-grid {
         gap: 24px !important;
     }
 
-    div[class*="md:grid-cols-2"][class*="gap-10"] > div .relative.h-80 {
+    .team-photo {
         height: 240px !important;
     }
 
     /* -- Nosotros: Industrial banner -- */
-    section[class*="h-64"] {
+    .banner-strip {
         height: 200px !important;
     }
 
-    section[class*="h-64"] h2 {
+    .banner-strip h2 {
         font-size: 1.25rem !important;
     }
 
-    section[class*="h-64"] p {
+    .banner-strip p {
         font-size: 0.8rem !important;
         margin-top: 8px !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
 
-    section[class*="h-64"] .material-symbols-outlined {
+    .banner-strip .material-symbols-outlined {
         font-size: 36px !important;
         margin-bottom: 8px !important;
     }
 
     /* -- Nosotros: CTA strip -- */
-    section[class*="bg-primary"][class*="py-16"] .flex {
+    .strip-primary .flex {
         text-align: center;
     }
 
-    section[class*="bg-primary"][class*="py-16"] h2 {
+    .strip-primary h2 {
         font-size: 1.35rem !important;
     }
 
-    section[class*="bg-primary"][class*="py-16"] a[class*="shrink-0"] {
+    .strip-cta-btn {
         width: 100% !important;
         justify-content: center !important;
     }
 
     /* -- Servicios: Hero banner text -- */
-    section[class*="bg-primary"][class*="py-16"] h1 {
+    .strip-primary h1 {
         font-size: 1.5rem !important;
         line-height: 1.3 !important;
     }
 
-    section[class*="bg-primary"][class*="py-16"] p {
+    .strip-primary p {
         font-size: 0.9rem !important;
     }
 
-    /* -- Servicios: Service cards grid -- */
-    .service-card .p-6 h3 {
-        font-size: 0.85rem !important;
-    }
 
     /* -- Contacto: Form and info section -- */
-    .dark-page section[class*="py-16"] h1 {
+    .contact-hero h1 {
         font-size: 1.5rem !important;
         line-height: 1.3 !important;
     }
 
-    .dark-page section[class*="py-16"] p[class*="text-lg"] {
+    .contact-lead {
         font-size: 0.95rem !important;
     }
 
     /* Contact cards grid */
-    .dark-page div[class*="sm:grid-cols-2"][class*="gap-4"] {
+    .contact-cards {
         gap: 12px !important;
     }
 
-    .dark-page div[class*="sm:grid-cols-2"][class*="gap-4"] > div {
+    .contact-cards > div {
         padding: 16px !important;
     }
 
     /* Contact form container */
-    .dark-page div[class*="p-8"][class*="md:p-10"] {
+    .contact-box {
         padding: 20px !important;
     }
 
     /* Map section */
-    section[class*="h-80"] {
+    .map-section, .banner-strip {
         height: 250px !important;
     }
 
-    section[class*="h-80"] div[class*="absolute"][class*="top-4"] {
+    .map-badge-top {
         max-width: 200px !important;
         padding: 10px !important;
     }
 
-    section[class*="h-80"] div[class*="absolute"][class*="bottom-4"] {
+    .map-badge-bottom {
         max-width: 200px !important;
         padding: 10px !important;
         font-size: 0.7rem !important;
@@ -452,12 +447,12 @@ h6 {
         padding-bottom: 24px !important;
     }
 
-    footer .flex.flex-col.md\:flex-row {
+    .footer-row {
         gap: 24px !important;
         margin-bottom: 24px !important;
     }
 
-    footer .grid {
+    .footer-cols {
         gap: 24px !important;
     }
 
@@ -475,14 +470,14 @@ h6 {
     }
 
     /* -- WhatsApp floating button: slightly smaller on mobile -- */
-    a[class*="fixed"][class*="bottom-6"][class*="right-6"] {
+    .whatsapp-float {
         width: 52px !important;
         height: 52px !important;
         bottom: 16px !important;
         right: 16px !important;
     }
 
-    a[class*="fixed"][class*="bottom-6"][class*="right-6"] svg {
+    .whatsapp-float svg {
         width: 28px !important;
         height: 28px !important;
     }
@@ -511,7 +506,7 @@ h6 {
         font-size: 2.25rem !important;
     }
 
-    section[class*="h-64"] {
+    .banner-strip {
         height: 220px !important;
     }
 }
