@@ -1,5 +1,5 @@
 /**
- * POST /api/contacto — guarda una consulta del formulario en D1.
+ * POST /form/contacto — guarda una consulta del formulario en D1.
  *
  * Bindings (wrangler.toml / panel de Pages):
  *   DB                     -> base D1 "ingelyv-contacto"
