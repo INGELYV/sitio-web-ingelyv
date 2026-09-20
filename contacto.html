@@ -27,6 +27,9 @@
         content="Contáctanos para tus proyectos de Registro Empresarial Full, desarrollo de Sitios Web Corporativos o Soluciones de Automatización e IA." />
     <meta name="twitter:image" content="https://www.ingelyv.cl/img/og-ingelyv.png" />
     <!-- include: head-common.html -->
+
+    <!-- Turnstile: antispam de Cloudflare (la llave pública se define en el widget del formulario) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -174,6 +177,9 @@
                                         placeholder="Cuéntanos brevemente sobre tu requerimiento..."
                                         class="form-input w-full px-4 py-3 bg-background-dark border border-border-dark text-white text-sm rounded-sm placeholder:text-gray-500 focus:border-accent-orange-deep focus:ring-0 resize-none"></textarea>
                                 </div>
+                                <div class="cf-turnstile" data-sitekey="TURNSTILE_SITE_KEY" data-theme="dark"
+                                    data-language="es"></div>
+
                                 <button type="submit"
                                     class="w-full h-12 bg-accent-orange-deep hover:bg-accent-orange-deep/80 text-white text-sm font-bold uppercase tracking-wider transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg">
                                     <span>Enviar por WhatsApp</span>
@@ -215,7 +221,7 @@
     <!-- FOOTER (Dark) -->
     <!-- include: footer.html FOOTER_BG="bg-accent-orange-deep" -->
     <!-- include: whatsapp.html -->
-    <script src="js/main.js?v=20260922"></script>
+    <script src="js/main.js?v=20260923"></script>
 </body>
 
 </html>

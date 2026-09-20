@@ -17,3 +17,6 @@ dist/
 # Dependencias y CSS compilado
 node_modules/
 css/tailwind.css
+
+# Wrangler local state
+.wrangler/

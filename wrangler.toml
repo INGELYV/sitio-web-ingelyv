@@ -1,0 +1,12 @@
+# Configuración de Cloudflare Pages (proyecto "ingelyv").
+# Define el binding de la base D1 que usa functions/api/contacto.js.
+# El secreto TURNSTILE_SECRET_KEY NO va aquí: se carga en el panel de Pages
+# (Settings → Variables and Secrets) o con `wrangler pages secret put`.
+name = "ingelyv"
+compatibility_date = "2026-09-20"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ingelyv-contacto"
+database_id = "29bc2fea-0bfe-4122-a4f3-dff981d33081"

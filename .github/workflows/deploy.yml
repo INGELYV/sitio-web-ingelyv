@@ -35,4 +35,4 @@ jobs:
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: 70e0b9b26ed031bec7be6e5a8fb9b7ce
-        command: pages deploy dist --project-name=ingelyv --branch=main
+        command: pages deploy --branch=main   # carpeta y bindings salen de wrangler.toml
