@@ -64,7 +64,7 @@ Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-valida
 ├── qr_whatsapp_INGELYV.png                 # QR de WhatsApp (no referenciado por las páginas)
 ├── _headers                # Cabeceras de Cloudflare Pages (caché por ruta)
 ├── robots.txt / sitemap.xml                # SEO: URLs limpias, dominio www, bots de IA permitidos
-├── functions/api/contacto.js  # Pages Function: valida Turnstile y guarda en D1
+├── functions/form/contacto.js # Pages Function: valida Turnstile y guarda en D1
 ├── wrangler.toml           # Config de Pages: carpeta de salida y binding DB (D1)
 ├── partials/               # Bloques compartidos: header(-dark), footer, whatsapp, head-common
 ├── scripts/build-html.mjs  # Resuelve los includes de partials/ al generar dist/
@@ -90,7 +90,7 @@ Las dependencias npm son solo de desarrollo (Tailwind, sus plugins y html-valida
 3. **Mejora progresiva en JS.** `main.js` registra un único `DOMContentLoaded` y cada módulo se activa solo si existe su elemento (*guard clauses*).
 4. **Design tokens en un solo lugar:** los colores de Tailwind apuntan a variables CSS (`--c-*`) definidas en `:root` de `styles.css`; `.dark-page` (contacto) redefine esas variables para su paleta naranja.
 5. **Enlaces internos con `.html` y URLs públicas limpias.** El HTML enlaza `servicios.html`, `index.html`, etc. Cloudflare Pages sirve URLs limpias de forma nativa (redirige `/x.html` → `/x`). Los canonical, OG y `sitemap.xml` usan siempre la forma limpia `https://www.ingelyv.cl/servicios`.
-6. **Formulario: WhatsApp primero, registro después.** `#contact-form` valida `#name` y `#message`, abre `https://wa.me/56948004882?text=…` y muestra `#contact-feedback` con respaldo a WhatsApp y `mailto:` (construido con `textContent`, nunca `innerHTML`). **En paralelo** hace `POST /api/contacto`, que guarda la consulta en la base D1 `ingelyv-contacto` (tabla `consultas`). Si esa llamada falla, el visitante no lo nota: WhatsApp ya se abrió. Turnstile protege el endpoint; si `TURNSTILE_SECRET_KEY` no está configurado, la función acepta el envío igual (no bloquea el formulario).
+6. **Formulario: WhatsApp primero, registro después.** `#contact-form` valida `#name` y `#message`, abre `https://wa.me/56948004882?text=…` y muestra `#contact-feedback` con respaldo a WhatsApp y `mailto:` (construido con `textContent`, nunca `innerHTML`). **En paralelo** hace `POST /form/contacto`, que guarda la consulta en la base D1 `ingelyv-contacto` (tabla `consultas`). Si esa llamada falla, el visitante no lo nota: WhatsApp ya se abrió. Turnstile protege el endpoint; si `TURNSTILE_SECRET_KEY` no está configurado, la función acepta el envío igual (no bloquea el formulario).
 7. **SEO por página.** `<title>`, `meta description`, `canonical`, Open Graph, Twitter Card y JSON-LD con URL absoluta `https://www.ingelyv.cl/...`, más `sitemap.xml` y `robots.txt`, que permite explícitamente los bots de IA.
 8. **Conversión centrada en WhatsApp.** CTA "Cotizar" en el header, CTA del hero con texto prellenado por servicio y botón flotante verde (con `aria-label`) en todas las páginas.
 
@@ -235,6 +235,7 @@ CSS definido pero sin uso actual en el HTML (verificar con grep antes de reutili
 
 ### 7.1 Formulario de contacto (D1 + Turnstile)
 
+- **Ruta:** `/form/contacto`. ⚠️ El Worker `vendedor-bot` ya tiene tomadas, en esta zona, las rutas `/api/*`, `/webhook/*`, `/admin*`, `/chat*`, `/dashboard*`, `/academia*`, `/landing*` y `/widget.js*`: cualquier endpoint nuevo del sitio debe evitarlas.
 - **Base de datos:** D1 `ingelyv-contacto` (`29bc2fea-0bfe-4122-a4f3-dff981d33081`), tabla `consultas` (`id, creado_en, nombre, empresa, telefono, email, servicio, mensaje, pagina, ip_pais, user_agent`).
 - **Binding:** `DB`, declarado en `wrangler.toml`; por eso el deploy usa `wrangler pages deploy --branch=main` (la carpeta sale de `pages_build_output_dir`).
 - **Secreto:** `TURNSTILE_SECRET_KEY` se carga en el panel de Pages (*Settings → Variables and secrets*) o con `wrangler pages secret put`. **Nunca** va en `wrangler.toml` ni en el repositorio.

@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // trigger on load
 
-    // ---- Contact Form: WhatsApp + Email (sin backend) ----
+    // ---- Contact Form: WhatsApp + Email + registro en D1 ----
     const WHATSAPP_NUMBER = '56948004882';
     const CONTACT_EMAIL = 'contacto@ingelyv.cl';
 
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Respaldo en el servidor: guarda la consulta en D1 (Pages Function).
             // Si falla, el visitante no se entera: WhatsApp ya se abrió.
             const turnstileToken = contactForm.querySelector('[name="cf-turnstile-response"]')?.value || '';
-            fetch('/api/contacto', {
+            fetch('/form/contacto', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
