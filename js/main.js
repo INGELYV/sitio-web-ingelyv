@@ -58,6 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
+        // Si todavía no se configuró la llave pública de Turnstile, se quita el widget
+        // para no mostrar un recuadro de error en producción.
+        const turnstileBox = contactForm.querySelector('.cf-turnstile');
+        if (turnstileBox && turnstileBox.dataset.sitekey === 'TURNSTILE_SITE_KEY') {
+            turnstileBox.remove();
+        }
+
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -106,6 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const mailUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Consulta web - ' + nameVal)}&body=${encodeURIComponent(text)}`;
 
             window.open(waUrl, '_blank', 'noopener');
+
+            // Respaldo en el servidor: guarda la consulta en D1 (Pages Function).
+            // Si falla, el visitante no se entera: WhatsApp ya se abrió.
+            const turnstileToken = contactForm.querySelector('[name="cf-turnstile-response"]')?.value || '';
+            fetch('/api/contacto', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nombre: nameVal,
+                    empresa: companyVal,
+                    telefono: phoneVal,
+                    servicio: sectorText,
+                    mensaje: messageVal,
+                    pagina: window.location.pathname,
+                    turnstileToken
+                })
+            }).catch(() => { /* sin conexión o función no disponible: se ignora */ });
 
             // Respaldo visible por si el navegador bloquea la ventana (sin innerHTML con datos del usuario)
             let feedback = document.getElementById('contact-feedback');

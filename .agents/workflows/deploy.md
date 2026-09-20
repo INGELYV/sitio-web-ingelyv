@@ -18,7 +18,7 @@ Lo habitual es trabajar en una rama y hacer merge de un PR hacia `main`.
 ## Opción 2: Manual (wrangler)
 ```powershell
 bash scripts/build-dist.sh
-npx wrangler pages deploy dist --project-name ingelyv --branch main
+npx wrangler pages deploy --branch main
 ```
 
 > **Importante:** nunca desplegar `.` (la raíz), porque publicaría `CLAUDE.md`, `.agents/` y otros archivos internos.
