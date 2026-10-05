@@ -20,3 +20,4 @@ css/tailwind.css
 
 # Wrangler local state
 .wrangler/
+.env*
